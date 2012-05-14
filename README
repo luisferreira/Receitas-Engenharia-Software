@@ -1,0 +1,6 @@
+Things to change:
+	- Package name in src/main/java/.
+	- Package name in "pom.xml", "appServlet-servlet.xml" and "applicationContext.xml".
+	- PostgreSQL database login information in "applicationContext-persistence.xml"
+	
+Import as an existing Maven project in Eclipse or run "mvn clean install" and then "mvn tomcat7:run" directly in the folder.
