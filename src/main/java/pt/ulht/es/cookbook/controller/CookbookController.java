@@ -22,4 +22,16 @@ public class CookbookController {
 		model.addAttribute("title", "Software Cookbook");		
 		return "home";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/recipes/create")
+	public String showRecipeCreationForm(Model model) {
+		
+		Date date = new Date(System.currentTimeMillis());
+		DateFormat df = DateFormat.getDateInstance();
+		model.addAttribute("currentTime", df.format(date));
+		
+		
+		model.addAttribute("title", "Software Cookbook");		
+		return "newrecipe";
+	}
 }

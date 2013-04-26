@@ -11,5 +11,7 @@
 	<div class="container">
 		<p>Test</p>
 	</div>
+	
+	<a href="/recipes/create" >Criar Receita</a>
 </body>
 </html>
