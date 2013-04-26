@@ -1,0 +1,25 @@
+package pt.ulht.es.cookbook.domain;
+
+class CookBookManager;
+
+class CookBook {
+	DateTime creationTimestamp;
+}
+
+class Recipe {
+	String text;
+	DateTime creationTimestamp;
+	DateTime completionTimestamp;
+}
+
+/*
+relation TodoManagerHasTodoLists {
+	TodoManager playsRole todoManager { multiplicity 1..1; }
+	TodoList playsRole todoList { multiplicity 0..*; }	
+}
+
+relation TodoManagerHasTodos {
+	TodoList playsRole todoList { multiplicity 1..1; }	
+	Todo playsRole todo { multiplicity 0..*; }
+}
+*/

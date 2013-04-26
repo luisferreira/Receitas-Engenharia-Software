@@ -4,16 +4,24 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   <servlet>
-    <servlet-name>appServlet</servlet-name>
+    <servlet-name>cookbookServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/appServlet-servlet.xml</param-value>
+      <param-value>/WEB-INF/cookbook-servlet.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <filter>
+    <filter-name>transaction-filter</filter-name>
+	<filter-class>pt.ulht.es.cookbook.filter.TransactionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+	<filter-name>transaction-filter</filter-name>
+	<url-pattern>/*</url-pattern>
+  </filter-mapping>
   <servlet-mapping>
-    <servlet-name>appServlet</servlet-name>
+    <servlet-name>cookbookServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 </web-app>
