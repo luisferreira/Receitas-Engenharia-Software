@@ -17,7 +17,11 @@
 					<td><input type="text" name="recipeName"></td>
 				</tr>
 				<tr>
-					<td>Recipe Description</td>
+					<td>Recipe Problem Description</td>
+					<td><input type="text" name="recipeDescription"></td>
+				</tr>
+				<tr>
+					<td>Recipe Solution Description</td>
 					<td><input type="text" name="recipeDescription"></td>
 				</tr>
 				<tr>
