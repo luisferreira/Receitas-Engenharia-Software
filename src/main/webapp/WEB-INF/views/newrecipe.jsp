@@ -9,11 +9,31 @@
 </head>
 <body>
 	<div class="container">
-
-	
-
-		<a href="/recipes/create">teste</a>
-	</div>
-
+		<h1>Criar Nova Receita</h1>
+		<center>
+			<table>
+				<tr>
+					<td>Recipe Name</td>
+					<td><input type="text" name="recipeName"></td>
+				</tr>
+				<tr>
+					<td>Recipe Description</td>
+					<td><input type="text" name="recipeDescription"></td>
+				</tr>
+				<tr>
+					<td>Recipe Author</td>
+					<td><input type="text" name="recipeAuthor"></td>
+				</tr>
+				<tr>
+					<td>Recipe Date</td>
+					<td><input type="text" id="recipeDate" name="recipeDate"></td>
+					<script type="text/javascript">
+						document.getElementById("recipeDate").value = new Date();
+					</script>
+				</tr>
+			</table>
+			<div class="container">
+				<a href=" ">Criar Receita</a> 
+				<a href=" ">Limpar Campos</a>
 </body>
 </html>

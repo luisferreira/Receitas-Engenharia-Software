@@ -9,6 +9,16 @@
 </head>
 <body>
 	<div class="container">
-		<a href="/recipes/create">Criar Receita</a>
+		<table>
+			<tr>
+				<td>Recipe Name</td>
+				<td><input type="text" name="recipeName"></td>
+			</tr>
+			<tr>
+				<td>Recipe Description</td>
+				<td><input type="text" name="recipeDescription"></td>
+			</tr>
+		</table>
+				<a href="/recipes/create">Criar Receita</a>
 </body>
 </html>
