@@ -13,7 +13,7 @@
 						<a href="/list"><i class="icon-book"></i> All recipes</a>
 					</li>
 					<li class="">
-						<a href="/create"><i class="icon-pencil"></i> Create Recipe</a>
+						<a href="/recipes/create"><i class="icon-pencil"></i> Create Recipe</a>
 					</li>
 				</ul>
 				<form class="navbar-search pull-right">

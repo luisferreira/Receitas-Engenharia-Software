@@ -8,36 +8,49 @@
 <%@ include file="/WEB-INF/views/common/libs.jsp"%>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/common/navbar.jsp"%>
+	<header id="overview" class="jumbotron subhead">
+		<div class="container">
+			<h1>Create new recipe</h1>
+			<p>Know something and want to share with the world?</p>
+			<p>Go ahead, show your software-fu!</p>
+		</div>
+	</header>
 	<div class="container">
-		<h1>Criar Nova Receita</h1>
-		<center>
-			<table>
-				<tr>
-					<td>Recipe Name</td>
-					<td><input type="text" name="recipeName"></td>
-				</tr>
-				<tr>
-					<td>Recipe Problem Description</td>
-					<td><input type="text" name="recipeDescription"></td>
-				</tr>
-				<tr>
-					<td>Recipe Solution Description</td>
-					<td><input type="text" name="recipeDescription"></td>
-				</tr>
-				<tr>
-					<td>Recipe Author</td>
-					<td><input type="text" name="recipeAuthor"></td>
-				</tr>
-				<tr>
-					<td>Recipe Date</td>
-					<td><input type="text" id="recipeDate" name="recipeDate"></td>
-					<script type="text/javascript">
-						document.getElementById("recipeDate").value = new Date();
-					</script>
-				</tr>
-			</table>
-			<div class="container">
-				<a href=" ">Criar Receita</a> 
-				<a href=" ">Limpar Campos</a>
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="recipeName">Title</label>
+				<div class="controls">
+					<input type="text" class="input-xxlarge" id="recipeName" placeholder="How to do an infinite loop">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="recipeProblem">Problem</label>
+				<div class="controls">
+					<textarea rows="2" class="input-xxlarge" id="recipeProblem" placeholder="Know how many cycles it take to do an infinite loop"></textarea>
+					<span class="help-block">Add a brief description of the problem.</span>
+				</div>
+			</div>
+			<div class="control-group">	
+				<label class="control-label" for="recipeSolution">Solution</label>
+				<div class="controls">
+					<textarea rows="3" class="input-xxlarge" id="recipeSolution" placeholder="How did you slay that dragon?"></textarea>
+					<span class="help-block">Describe how to solve that problem.</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="recipeAuthor">Author</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="recipeAuthor" placeholder="That's you!">
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+			    	<button type="submit" class="btn btn-primary">Save recipe</button>
+			    	<button type="button" class="btn">Cancel</button>
+			    </div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
