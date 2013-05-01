@@ -1,22 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${title}</title>
-<%@ include file="/WEB-INF/views/common/libs.jsp"%>
-</head>
-<body>
-	<%@ include file="/WEB-INF/views/common/navbar.jsp"%>
-	<header id="overview" class="jumbotron subhead">
-		<div class="container">
+	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="container">
+		<div class="page-header">
 			<h1>Create new recipe</h1>
 			<p>Know something and want to share with the world?</p>
 			<p>Go ahead, show your software-fu!</p>
 		</div>
-	</header>
-	<div class="container">
 		<form class="form-horizontal">
 			<div class="control-group">
 				<label class="control-label" for="recipeName">Title</label>
@@ -52,5 +40,4 @@
 			</div>
 		</form>
 	</div>
-</body>
-</html>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>

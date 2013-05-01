@@ -1,1 +1,0 @@
-<script type="text/javascript" src="/static/js/bootstrap_min.js"></script>

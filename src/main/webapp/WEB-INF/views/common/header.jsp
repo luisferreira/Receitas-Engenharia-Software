@@ -13,7 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
 	</head>
 	<body>
-		<div id="#wrap">
+		<div id="wrap">
 			<div class="navbar navbar-inverse navbar-fixed-top">
 				<div class="navbar-inner">
 					<div class="container">
