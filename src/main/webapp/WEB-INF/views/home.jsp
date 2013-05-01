@@ -1,14 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${title}</title>
-<%@ include file="/WEB-INF/views/common/libs.jsp"%>
-</head>
-<body>
-	<%@ include file="/WEB-INF/views/common/navbar.jsp"%>
+	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<header id="overview" class="jumbotron subhead">
 		<div class="container">
 			<h1>Software Cookbook</h1>
@@ -20,7 +10,6 @@
 		</div>
 	</header>
 	<div class="container">
-		
 		<div>
 			<h1>Latest recipes added</h1>
 			<table class="table table-hover">
@@ -48,12 +37,11 @@
 					<tr>
 						<td>//~ BTT</td>
 						<td>Alhos Vedros</td>
-						<td>Jo√£o Tom√°s</td>
+						<td>Jo„o Tom·s</td>
 						<td>22-04-2013 08:13</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-</body>
-</html>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
