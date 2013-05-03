@@ -17,7 +17,7 @@ import pt.ulht.es.cookbook.domain.Recipe;
 public class RecipeController {
 	
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/recipes/listrecipes")
+	@RequestMapping(method = RequestMethod.POST, value = "/recipes/list")
 	public String listrecipes (Model model) {
 		Collection<Recipe> recipes = CookBookManager.getRecipes();
 		model.addAttribute("recipes", recipes);

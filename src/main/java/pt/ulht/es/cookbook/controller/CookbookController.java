@@ -30,7 +30,7 @@ public class CookbookController {
 		return "newrecipe";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/recipes/listrecipes")
+	@RequestMapping(method = RequestMethod.GET, value = "/recipes/list")
 	public String showListRecipe(Model model) {
 		model.addAttribute("currentTime",
 				new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm")
