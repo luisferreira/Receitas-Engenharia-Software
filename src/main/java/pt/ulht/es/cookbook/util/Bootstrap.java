@@ -9,7 +9,6 @@ import pt.ist.fenixframework.FenixFramework;
 
 public class Bootstrap implements WebApplicationInitializer {
 
-	@Override
 	public void onStartup(ServletContext ctx) throws ServletException {
 		FenixFramework.initialize(PropertiesManager.getFenixFrameworkConfig());
 	}
