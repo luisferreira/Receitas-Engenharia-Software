@@ -9,6 +9,11 @@
 </head>
 <body>
 	<div class="container">
-		<a href="/recipes/create">Criar Receita</a>
+		<h1>CookBook</h1>
+		<center>
+			<div class="container">
+				<a href="/recipes/create">Criar Nova Receita</a>
+				<p></p>
+				<a href="/recipes/listrecipes">Listar Receitas</a>
 </body>
 </html>
