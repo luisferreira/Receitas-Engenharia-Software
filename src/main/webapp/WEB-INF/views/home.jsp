@@ -1,14 +1,13 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
-	<header id="overview" class="jumbotron subhead">
+	<div id="overview" class="jumbotron subhead">
 		<div class="container">
 			<h1>Software Cookbook</h1>
 			<p>Common solutions to software-related problems</p>
-			<p>
+				<a href="google.com">ddd</a>
 				<a class="btn btn-primary btn-large" href="/recipes/create">Add
 					your own!</a>
-			</p>
 		</div>
-	</header>
+	</div>
 	<div class="container">
 		<div>
 			<h1>Latest recipes added</h1>

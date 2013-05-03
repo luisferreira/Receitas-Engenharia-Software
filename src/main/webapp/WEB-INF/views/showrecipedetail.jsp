@@ -22,13 +22,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%= for (Recipe version ; versions) {%>
+					<c:forEach items="${recipe.versions}" var="version">
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>${version.version}</td>
+							<td>${version.dateAdded}</td>
+							<td>${version.author}</td>
 						</tr>
-					<%=} %>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
