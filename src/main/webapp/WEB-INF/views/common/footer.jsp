@@ -1,13 +1,9 @@
-<html>
-<head>
-<body>
-
 	<div id="push"></div>
 	</div>
 	<div id="footer">
 		<div class="container">
 			<p class="muted credit">Made for Software Engineering class by
-				Miguel Verissimo, Luis Ferreira, Rui Silva e Jo„o Feteira. LIG 3N1
+				Miguel Verissimo, Luis Ferreira, Rui Silva e Jo√£o Feteira. LIG 3N1
 				2013</p>
 		</div>
 	</div>
