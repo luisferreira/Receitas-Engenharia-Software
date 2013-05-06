@@ -18,21 +18,27 @@ import pt.ulht.es.cookbook.domain.Recipe;
 @Controller
 public class RecipeController {
 
-	/*Create recipe and redirect to ShowRecipeDetail "/recipes/{id}"*/
+	/* Create recipe and redirect to ShowRecipeDetail "/recipes/{id}" */
 	@RequestMapping(method = RequestMethod.POST, value = "/recipes")
 	public String createRecipe(@RequestParam Map<String, String> params) {
 
 		String recipetitle = params.get("recipetitle");
-		String recipeProblemDescription = params.get("recipeProblemDescription");
-		String recipeSolutionDescription = params.get("recipeSolutionDescription");
+		String recipeProblemDescription = params
+				.get("recipeProblemDescription");
+		String recipeSolutionDescription = params
+				.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
-		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
+		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription,
+				recipeSolutionDescription, recipeAuthor);
 		CookBookManager.saveRecipe(recipe);
-		
+
 		return "redirect:/recipes/" + recipe.getid();
 	}
 
-	/*Show recipe from id. If recipe with id exists, redirect to showRecipeDetail*/
+	/*
+	 * Show recipe from id. If recipe with id exists, redirect to
+	 * showRecipeDetail
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipes/{id}")
 	public String showRecipe(Model model, @PathVariable String id) {
 		Recipe recipe = CookBookManager.getRecipe(id);
@@ -46,24 +52,15 @@ public class RecipeController {
 
 	}
 
-	/*Show list of recipes*/
+	/* Show list of recipes */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipes/list")
 	public String showAllRecipes(Model model) {
 		model.addAttribute("recipes", CookBookManager.getRecipes());
-		
+
 		return "listrecipes";
 	}
-	
-	/*Show list of recipes*/
-	@RequestMapping(method = RequestMethod.GET, value = "/recipes/create2")
-	public String showlastRecipesInHome(Model model) {
-		model.addAttribute("recipes", CookBookManager.getRecipes());
-		
-		return "home";
-	}
 
-
-	/*show home page*/
+	/* show home page */
 	@RequestMapping(method = RequestMethod.GET, value = "/")
 	public String showHomePage(Model model) {
 
@@ -71,20 +68,25 @@ public class RecipeController {
 		DateFormat df = DateFormat.getDateInstance();
 		model.addAttribute("currentTime", df.format(date));
 		model.addAttribute("title", "Cookbook");
-		
+
+		/* For fill table os last recipes added on show home page */
+		model.addAttribute("recipes", CookBookManager.getRecipes());
+
 		return "home";
 	}
 
-	/*Show new recipe form*/
+	/* Show new recipe form */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipes/create")
 	public String showRecipeCreationForm(Model model) {
-		model.addAttribute("currentTime", new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date(System.currentTimeMillis())));
+		model.addAttribute("currentTime",
+				new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm")
+						.format(new Date(System.currentTimeMillis())));
 		model.addAttribute("title", "Cookbook");
-		
+
 		return "newrecipe";
 	}
 
-	/*Show recipe after crate*/
+	/* Show recipe after crate */
 	@RequestMapping(method = RequestMethod.POST, value = "recipes/list")
 	public String listrecipes(Model model) {
 		Collection<Recipe> recipes = CookBookManager.getRecipes();

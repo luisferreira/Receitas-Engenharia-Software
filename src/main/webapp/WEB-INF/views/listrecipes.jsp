@@ -27,6 +27,7 @@
 						<c:forEach var="recipe" items='${recipes}'>
 							<tr>
 								<td><a href="/recipes/${recipe.getid()}">${recipe.getid()}</a></td>
+								<td>${recipe.getRecipetitle()}</td>
 								<td>${recipe.getRecipeProblemDescription()}</td>
 								<td>${recipe.getRecipeAuthor()}</td>
 								<td>${recipe.getCreationData()}</td>

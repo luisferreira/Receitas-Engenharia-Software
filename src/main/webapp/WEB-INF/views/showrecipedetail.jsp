@@ -1,4 +1,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+<html>
+<head>
 <div class="container">
 	<div class="page-header">
 		<h1>${recipe.getRecipetitle()}</h1>
@@ -10,9 +12,11 @@
 		<p class="lead">The solution:</p>
 		<p>${recipe.getRecipeSolutionDescription()}</p>
 	</div>
-	<div>
-		<!-- <p class="lead">Metadata</p> -->
-		<!-- <table class="table-striped">
+</div>
+</html>
+<body>
+	<div class="container">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>Version</th>
@@ -21,15 +25,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				
+
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>${recipe.getRecipeversion()}</td>
+					<td>${recipe.getCreationData()}</td>
+					<td>${recipe.getRecipeAuthor()}</td>
 				</tr>
-				
+
 			</tbody>
-		</table> -->
+		</table>
 	</div>
-</div>
+</body>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
