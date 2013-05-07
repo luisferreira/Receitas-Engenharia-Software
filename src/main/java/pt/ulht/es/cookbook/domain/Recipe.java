@@ -1,5 +1,7 @@
 package pt.ulht.es.cookbook.domain;
 
+import java.util.Date;
+
 public class Recipe extends Recipe_Base{
 
 	private String recipetitle;
@@ -7,12 +9,20 @@ public class Recipe extends Recipe_Base{
 	private String recipeSolutionDescription;
 	private String recipeAuthor;
 	private String id;
+	private Date creationData;
+	private int recipeversion;
 
 	public Recipe(String recipetitle, String recipeProblemDescription,String recipeSolutionDescription, String recipeAuthor) {
 		this.recipeAuthor = recipeAuthor;
 		this.recipeProblemDescription = recipeProblemDescription;
 		this.recipeSolutionDescription = recipeSolutionDescription;
 		this.recipetitle = recipetitle;
+		
+		java.util.Date date= new java.util.Date();
+		this.creationData = new Date();
+		
+		/*Necessário alterar isto quando existir controlo de versões*/
+		this.recipeversion = 1;
 	}
 
 	public void setRecipeAuthor(String recipeAuthor) {
@@ -53,5 +63,21 @@ public class Recipe extends Recipe_Base{
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public void setCreationData(Date creationData) {
+		this.creationData = creationData;
+	}
+	
+	public Date getCreationData() {
+		return creationData;
+	}
+	
+	public int getRecipeversion() {
+		return recipeversion;
+	}
+	
+	public void setRecipeversion(int recipeversion) {
+		this.recipeversion = recipeversion;
 	}
 }

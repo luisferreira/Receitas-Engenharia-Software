@@ -5,31 +5,31 @@
 			<p>Know something and want to share with the world?</p>
 			<p>Go ahead, show your software-fu!</p>
 		</div>
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="post" action="/recipes">
 			<div class="control-group">
-				<label class="control-label" for="recipeName">Title</label>
+				<label class="control-label" for="recipetitle">Title</label>
 				<div class="controls">
-					<input type="text" class="input-xxlarge" id="recipeName" placeholder="How to do an infinite loop">
+					<input type="text" class="input-xxlarge" id="recipetitle" name="recipetitle" placeholder="How to do an infinite loop" name=>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="recipeProblem">Problem</label>
+				<label class="control-label" for="recipeProblemDescription">Problem</label>
 				<div class="controls">
-					<textarea rows="2" class="input-xxlarge" id="recipeProblem" placeholder="Know how many cycles it take to do an infinite loop"></textarea>
+					<textarea rows="2" class="input-xxlarge" id="recipeProblemDescription" name="recipeProblemDescription" placeholder="Know how many cycles it take to do an infinite loop"></textarea>
 					<span class="help-block">Add a brief description of the problem.</span>
 				</div>
 			</div>
 			<div class="control-group">	
 				<label class="control-label" for="recipeSolution">Solution</label>
 				<div class="controls">
-					<textarea rows="3" class="input-xxlarge" id="recipeSolution" placeholder="How did you slay that dragon?"></textarea>
+					<textarea rows="3" class="input-xxlarge" id="recipeSolutionDescription" name="recipeSolutionDescription" placeholder="How did you slay that dragon?"></textarea>
 					<span class="help-block">Describe how to solve that problem.</span>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="recipeAuthor">Author</label>
 				<div class="controls">
-					<input type="text" class="input-xlarge" id="recipeAuthor" placeholder="That's you!">
+					<input type="text" class="input-xlarge" id="recipeAuthor" name="recipeAuthor" placeholder="That's you!">
 				</div>
 			</div>
 			<div class="control-group">
