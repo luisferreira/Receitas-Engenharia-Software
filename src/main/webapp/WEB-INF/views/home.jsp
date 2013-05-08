@@ -1,13 +1,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<div class="jumbotron subhead" id="overview">
-	<div class="container">
+<div class="container">
+	<div class="span12 pagination-centered">
 		<h1>Software Cookbook</h1>
 		<p>Common solutions to software-related problems</p>
-		<a class="btn btn-primary btn-large" href="/recipes/create">Add
-			your own!</a>
+		<a class="btn btn-primary btn-large" href="/recipes/create">Add your own!</a>
 	</div>
-
-
 </div>
 <c:if test="${fn:length(recipes) > 0}">
 	<div class="container">
