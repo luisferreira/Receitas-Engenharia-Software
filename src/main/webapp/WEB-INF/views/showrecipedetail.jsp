@@ -24,7 +24,7 @@
 				<tbody>
 					<tr>
 						<td>${recipe.id}</td>
-						<td>${recipe.creationDate}</td>
+						<td>${recipe.formatedCreationDate}</td>
 						<td>${recipe.recipeAuthor}</td>
 					</tr>
 				</tbody>

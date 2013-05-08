@@ -66,7 +66,7 @@ public class RecipeController {
 		model.addAttribute("currentTime", df.format(date));
 		model.addAttribute("title", "Cookbook");
 
-		/* For fill table os last recipes added on show home page */
+		/* For fill table of last recipes added on show home page */
 		model.addAttribute("recipes", CookBookManager.getLastFiveRecipes());
         //System.out.println(CookBookManager.getLastFiveRecipes());
 		return "home";

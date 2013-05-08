@@ -27,7 +27,7 @@
 										<td>${recipe.recipeTitle}</td>
 										<td>${recipe.recipeProblemDescription}</td>
 										<td>${recipe.recipeAuthor}</td>
-										<td>${recipe.creationDate}</td>
+										<td>${recipe.formatedCreationDate}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
