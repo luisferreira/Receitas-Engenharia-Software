@@ -3,7 +3,7 @@
 		<div>
 			<div>
 				<h1>Latest recipes added</h1>
-				<table class="table table-hover">
+				<table class="table table-hover" data-provides="rowlink">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -17,10 +17,10 @@
 						<c:forEach var="recipe" items='${recipes}'>
 							<tr>
 								<td><a href="/recipes/${recipe.id}">${recipe.id}</a></td>
-								<td>${recipe.RecipeTitle}</td>
-								<td>${recipe.RecipeProblemDescription}</td>
-								<td>${recipe.RecipeAuthor}</td>
-								<td>${recipe.CreationDate}</td>
+								<td>${recipe.recipeTitle}</td>
+								<td class="nolink">${recipe.recipeProblemDescription}</td>
+								<td class="nolink">${recipe.recipeAuthor}</td>
+								<td class="nolink">${recipe.creationDate}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

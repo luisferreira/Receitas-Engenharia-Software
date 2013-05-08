@@ -9,6 +9,7 @@
 	</div>
 	<script src="/static/js/jquery.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/bootstrap-rowlink.min.js"></script>
 </body>
 </head>
 </html>

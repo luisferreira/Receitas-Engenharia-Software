@@ -32,7 +32,7 @@ public class RecipeController {
 				recipeSolutionDescription, recipeAuthor);
 		CookBookManager.saveRecipe(recipe);
 
-		return "redirect:/recipes/" + recipe.getid();
+		return "redirect:/recipes/" + recipe.getId();
 	}
 
 	/*
