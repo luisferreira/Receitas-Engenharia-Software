@@ -24,8 +24,6 @@ public class CookBookManager extends CookBookManager_Base{
 		recipe.setId(id);
 		RECIPE_MAP.put(id, recipe);
 		nextRecipeId++;
-		
-		//System.out.println("Receita criada com o id:" + recipe.getid() + "Title: " + recipe.getRecipetitle());
 	}
 
 	public static Recipe getRecipe(String id) {

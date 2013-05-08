@@ -19,12 +19,10 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe> {
 		this.recipeProblemDescription = recipeProblemDescription;
 		this.recipeSolutionDescription = recipeSolutionDescription;
 		this.recipeTitle = recipetitle;
-		
-		java.util.Date date= new java.util.Date();
 		this.creationDate = new Date();
 		
-		/*Format Data to show in interface. creationdate not reused because is actually used with date type by comparator*/
-		SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");	
+		/*Format Date to show in interface. creationdate not reused because its being used with date type by comparator*/
+		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");	
 		this.formatedCreationDate = format.format(this.creationDate);
 		
 		/*Necessário alterar isto quando existir controlo de versões*/

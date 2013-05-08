@@ -10,7 +10,7 @@
 					</c:when>
 					<c:otherwise>
 						<h1>Recipes</h1>
-						<table class="table table-striped table-bordered">
+						<table class="table table-hover" data-provides="rowlink">
 							<thead>
 								<tr>
 									<th>ID</th>
@@ -20,14 +20,14 @@
 									<th>Date Added</th>
 								</tr>
 							</thead>
-							<tbody data-provides="rowlink">
+							<tbody>
 								<c:forEach var="recipe" items='${recipes}'>
 									<tr>
-										<td><a class="rowlink"href="/recipes/${recipe.id}">${recipe.id}</a></td>
+										<td><a href="/recipes/${recipe.id}">${recipe.id}</a></td>
 										<td>${recipe.recipeTitle}</td>
-										<td>${recipe.recipeProblemDescription}</td>
-										<td>${recipe.recipeAuthor}</td>
-										<td>${recipe.formatedCreationDate}</td>
+										<td class="nolink">${recipe.recipeProblemDescription}</td>
+										<td class="nolink">${recipe.recipeAuthor}</td>
+										<td class="nolink">${recipe.creationDate}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

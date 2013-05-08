@@ -35,7 +35,7 @@
 			<div class="control-group">
 				<div class="controls">
 			    	<button type="submit" class="btn btn-primary">Save recipe</button>
-			    	<button type="button" class="btn">Cancel</button>
+			    	<button type="button" class="btn" onclick="location.href='/'">Cancel</button>
 			    </div>
 			</div>
 		</form>
