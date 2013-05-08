@@ -1,7 +1,7 @@
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<div class="page-header">
-			<h1>${recipe.recipetitle}</h1>
+			<h1>${recipe.recipeTitle}</h1>
 		</div>
 			<p class="lead">The problem:</p>
 			<p>${recipe.recipeProblemDescription}</p>
@@ -24,7 +24,7 @@
 				<tbody>
 					<tr>
 						<td>${recipe.id}</td>
-						<td>${recipe.creationData}</td>
+						<td>${recipe.creationDate}</td>
 						<td>${recipe.recipeAuthor}</td>
 					</tr>
 				</tbody>

@@ -1,4 +1,4 @@
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div id="overview" class="jumbotron subhead">
 		<div class="container">
 			<h1>Software Cookbook</h1>
@@ -43,4 +43,4 @@
 			</table>
 		</div>
 	</div>
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>
