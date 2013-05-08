@@ -13,7 +13,7 @@
 		</div>
 		<div>
 			<p class="lead">Metadata</p>
-			<table class="table-striped">
+			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th>ID</th>
