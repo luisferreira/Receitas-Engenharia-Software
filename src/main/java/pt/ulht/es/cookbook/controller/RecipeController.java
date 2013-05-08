@@ -1,7 +1,9 @@
 package pt.ulht.es.cookbook.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
@@ -55,7 +57,7 @@ public class RecipeController {
 	/* Show list of recipes */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipes/list")
 	public String showAllRecipes(Model model) {
-		model.addAttribute("recipes", CookBookManager.getRecipes());
+		model.addAttribute("recipes", CookBookManager.getOrderedRecipes());
 
 		return "listrecipes";
 	}
@@ -70,8 +72,8 @@ public class RecipeController {
 		model.addAttribute("title", "Cookbook");
 
 		/* For fill table os last recipes added on show home page */
-		model.addAttribute("recipes", CookBookManager.getRecipes());
-
+		model.addAttribute("recipes", CookBookManager.getLastFiveRecipes());
+        //System.out.println(CookBookManager.getLastFiveRecipes());
 		return "home";
 	}
 

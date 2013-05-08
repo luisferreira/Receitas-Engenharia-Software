@@ -2,7 +2,7 @@ package pt.ulht.es.cookbook.domain;
 
 import java.util.Date;
 
-public class Recipe extends Recipe_Base{
+public class Recipe extends Recipe_Base implements Comparable<Recipe>{
 
 	private String recipeTitle;
 	private String recipeProblemDescription;
@@ -79,5 +79,9 @@ public class Recipe extends Recipe_Base{
 	
 	public void setRecipeVersion(int recipeversion) {
 		this.recipeVersion = recipeversion;
+	}
+
+	public int compareTo(Recipe o) {
+		return this.getRecipeTitle().compareTo(o.getRecipeTitle());
 	}
 }

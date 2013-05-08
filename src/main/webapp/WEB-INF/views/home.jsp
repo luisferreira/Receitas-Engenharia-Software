@@ -8,39 +8,31 @@
 					your own!</a>
 		</div>
 	</div>
-	<div class="container">
-		<div>
-			<h1>Latest recipes added</h1>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Recipe</th>
-						<th>Description</th>
-						<th>Author</th>
-						<th>Added</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Lorem ipsum</td>
-						<td>Dolor sid Amet</td>
-						<td>Barrack Obama</td>
-						<td>30-04-2013 16:55</td>
-					</tr>
-					<tr>
-						<td>The onness</td>
-						<td>deh ottess</td>
-						<td>Cavaco Silva</td>
-						<td>30-04-2013 11:23</td>
-					</tr>
-					<tr>
-						<td>//~ BTT</td>
-						<td>Alhos Vedros</td>
-						<td>João Tomás</td>
-						<td>22-04-2013 08:13</td>
-					</tr>
-				</tbody>
-			</table>
+	<c:if test="${fn:length(recipes) > 0}">
+		<div class="container">
+			<div>
+				<h1>Latest recipes added</h1>
+				<table class="table table-hover" data-provides="rowlink">
+					<thead>
+						<tr>
+							<th>Recipe</th>
+							<th>Description</th>
+							<th>Author</th>
+							<th>Added</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="recipe" items='${recipes}'>
+							<tr>
+								<td><a href="/recipes/${recipe.id}">${recipe.recipeTitle}</a></td>
+								<td>${recipe.recipeProblemDescription}</td>
+								<td>${recipe.recipeAuthor}</td>
+								<td>${recipe.creationDate}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</div>
+	</c:if>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
