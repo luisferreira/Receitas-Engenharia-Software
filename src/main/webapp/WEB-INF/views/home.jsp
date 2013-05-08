@@ -3,7 +3,8 @@
 	<div class="span12 pagination-centered">
 		<h1>Software Cookbook</h1>
 		<p>Common solutions to software-related problems</p>
-		<a class="btn btn-primary btn-large" href="/recipes/create">Add your own!</a>
+		<a class="btn btn-primary btn-large" href="/recipes/create">Add your own</a>
+		<a class="btn btn-primary btn-large" href="/recipes/list">Show All Recipes</a>
 	</div>
 </div>
 <c:if test="${fn:length(recipes) > 0}">
