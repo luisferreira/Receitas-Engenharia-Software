@@ -30,14 +30,14 @@
 						<div class="nav-collapse collapse">
 							<ul class="nav">
 								<li class="">
-									<a href="/recipes/list"><i class="icon-book"></i> All recipes</a>
+									<a href="/recipe/all"><i class="icon-book"></i> All recipes</a>
 								</li>
 								<li class="">
-									<a href="/recipes/create"><i class="icon-pencil"></i> Create Recipe</a>
+									<a href="/recipe/create"><i class="icon-pencil"></i> Create Recipe</a>
 								</li>
 							</ul>
-							<form class="navbar-search pull-right">
-			    				<input type="text" class="search-query" placeholder="Search">
+							<form method="POST" action="/recipe/search" class="navbar-search pull-right">
+			    				<input type="text" class="search-query" placeholder="Search" name="param">
 			    			</form>
 						</div>
 					</div>
