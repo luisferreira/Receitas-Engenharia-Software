@@ -92,4 +92,15 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe> {
 	public int compareTo(Recipe o) {
 		return this.getRecipeTitle().compareTo(o.getRecipeTitle());
 	}
+	
+	public boolean match(String[] words){
+		boolean found = false;
+		for(String word : words){
+			 if (this.recipeTitle.toLowerCase().contains(word.toLowerCase())) {
+				 found = true;
+				 break;
+			 }
+		}
+		return found;
+	}
 }
