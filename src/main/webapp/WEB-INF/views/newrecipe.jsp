@@ -7,27 +7,27 @@
 		</div>
 		<form class="form-horizontal" method="post" action="/recipes">
 			<div class="control-group">
-				<label class="control-label" for="recipetitle">Title</label>
+				<label class="control-label" for="recipetitle">Title *</label>
 				<div class="controls">
-					<input type="text" class="input-xxlarge" id="recipetitle" name="recipetitle" placeholder="How to do an infinite loop" required name=>
+					<input type="text" class="input-xxlarge" id="recipetitle" name="recipetitle" placeholder="How to do an infinite loop" required>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="recipeProblemDescription">Problem</label>
+				<label class="control-label" for="recipeProblemDescription">Problem *</label>
 				<div class="controls">
 					<textarea rows="2" class="input-xxlarge" id="recipeProblemDescription" name="recipeProblemDescription" placeholder="Know how many cycles it take to do an infinite loop" required></textarea>
 					<span class="help-block">Add a brief description of the problem.</span>
 				</div>
 			</div>
 			<div class="control-group">	
-				<label class="control-label" for="recipeSolution">Solution</label>
+				<label class="control-label" for="recipeSolution">Solution *</label>
 				<div class="controls">
 					<textarea rows="3" class="input-xxlarge" id="recipeSolutionDescription" name="recipeSolutionDescription" placeholder="How did you slay that dragon?" required></textarea>
 					<span class="help-block">Describe how to solve that problem.</span>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="recipeAuthor">Author</label>
+				<label class="control-label" for="recipeAuthor">Author *</label>
 				<div class="controls">
 					<input type="text" class="input-xlarge" id="recipeAuthor" name="recipeAuthor" placeholder="That's you!" required>
 				</div>
