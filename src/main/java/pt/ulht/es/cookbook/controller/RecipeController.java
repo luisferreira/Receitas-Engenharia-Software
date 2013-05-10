@@ -32,8 +32,12 @@ public class RecipeController {
 		if (recipe != null) {
 			model.addAttribute("title", "[CookBook] - " + recipe.getRecipeTitle());
 			model.addAttribute("recipe", recipe);
-			if ((Boolean) model.asMap().get("creation")){
-				model.addAttribute("creationMessage", "success");
+			try {
+				if ((Boolean) model.asMap().get("creation")){
+					model.addAttribute("creationMessage", "success");
+				}
+			} catch (Exception e) {
+				System.out.println(e.getLocalizedMessage());
 			}
 			return "showRecipeDetail";
 		} else {
