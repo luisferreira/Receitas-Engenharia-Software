@@ -6,11 +6,14 @@
 					<c:when test="${fn:length(recipes) < 1}">
 						<h1>No recipes found with ${searchQuery}</h1>
 						<p class="lead">Search something else<p>
-						<form method="POST" action="/recipe/search" class="navbar-search pull-right">
-							<input type="text" class="search-query" placeholder="Search" name="param">
+						<form method="POST" action="/recipe/search" class="form-search">
+							<div class="input-append">
+								<input type="text" class="input-xxlarge search-query" placeholder="Search" name="param" required>
+								<button class="btn" type="submit">Search</button>
+							</div>
 						</form>
 						<p class="lead">Or..</p>
-						<a class="btn btn-primary" href="/recipe/create">Create one yourself!</a>
+						<a class="btn btn-primary" href="/recipe/create">Create a recipe yourself!</a>
 					</c:when>
 					<c:otherwise>
 						<h1>Recipes found with ${searchQuery}:</h1>
@@ -37,11 +40,14 @@
 							</tbody>
 						</table>
 						<p class="lead">Search something else<p>
-						<form method="POST" action="/recipe/search" class="navbar-search pull-right">
-							<input type="text" class="search-query" placeholder="Search" name="param">
+						<form method="POST" action="/recipe/search" class="form-search">
+							<div class="input-append">
+								<input type="text" class="input-xxlarge search-query" placeholder="Search" name="param" required>
+								<button class="btn" type="submit">Search</button>
+							</div>
 						</form>
 						<p class="lead">Or..</p>
-						<a class="btn btn-primary" href="/recipe/create">Create one yourself!</a>
+						<a class="btn btn-primary" href="/recipe/create">Create your own recipe!</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
