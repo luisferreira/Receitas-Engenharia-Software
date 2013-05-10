@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <div class="container">
-	<div class="span12 pagination-centered">
+	<div class="hero-unit">
 		<h1>Software Cookbook</h1>
 		<p>Common solutions to software-related problems</p>
 		<a class="btn btn-primary btn-large" href="/recipe/create">Add your own</a>

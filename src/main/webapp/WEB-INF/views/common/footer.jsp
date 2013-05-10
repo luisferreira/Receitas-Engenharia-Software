@@ -10,6 +10,15 @@
 	<script src="/static/js/jquery.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/bootstrap-rowlink.min.js"></script>
+	<script type="text/javascript">	
+		<!--
+			window.setTimeout(function() {
+		    	$("#saveSuccessMessage").fadeTo(500, 0).slideUp(500, function(){
+		        	$(this).remove(); 
+		    	});
+			}, 3500);
+		//-->
+	</script>
 </body>
 </head>
 </html>
