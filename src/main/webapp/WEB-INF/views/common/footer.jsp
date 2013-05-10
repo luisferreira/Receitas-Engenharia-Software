@@ -2,7 +2,7 @@
 	</div>
 	<div id="footer">
 		<div class="container">
-			<p class="muted credit">Made for Software Engineering class by
+			<p class="credit whiteText">Made for Software Engineering class by
 				Miguel Ver&iacute;ssimo, Lu&iacute;s Ferreira, Rui Silva e Jo&atilde;o Feteira. LIG 3N1
 				2013</p>
 		</div>
