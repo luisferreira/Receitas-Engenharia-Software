@@ -9,7 +9,7 @@
 			</div> 
 		</c:if>
 		<div class="page-header">
-			<h1>${recipe.recipeTitle}</h1>
+			<h1>${recipe.externalId}</h1>
 		</div>
 		<div class="row-fluid">
 			<div class="span5">
@@ -39,8 +39,6 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>${recipe.recipeVersion}</td>
-							<td>${recipe.formatedCreationDate}</td>
 							<td>${recipe.recipeAuthor}</td>
 						</tr>
 					</tbody>

@@ -5,13 +5,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import pt.ist.fenixframework.Config;
 import pt.ist.fenixframework.artifact.FenixFrameworkArtifact;
 import pt.ist.fenixframework.project.DmlFile;
 import pt.ist.fenixframework.project.exception.FenixFrameworkProjectException;
 import pt.ist.fenixframework.pstm.dml.FenixDomainModelWithOCC;
 import pt.ulht.es.cookbook.domain.CookBookManager;
+
+/*Vai ler o ficheiro de confirguração para obter dados de acesso à base de dados.*/
 
 public class PropertiesManager {
 

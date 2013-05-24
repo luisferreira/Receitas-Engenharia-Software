@@ -7,6 +7,9 @@ import org.springframework.web.WebApplicationInitializer;
 
 import pt.ist.fenixframework.FenixFramework;
 
+
+/*Inicialização da Fenix Framework com a confirmação a partir do Properties Manager*/
+
 public class Bootstrap implements WebApplicationInitializer {
 
 	public void onStartup(ServletContext ctx) throws ServletException {
