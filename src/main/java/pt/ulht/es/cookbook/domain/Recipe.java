@@ -12,7 +12,7 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe>{
     	setSolution(recipeSolutionDescription);
     	setAuthor(recipeAuthor);
     	setCreationTimestamp(new DateTime());    	
-    	setCookbookManager(CookbookManager.getInstance());
+    	setCookbookManager(CookBookManager.getInstance());
     }
     
 	public int compareTo(Recipe o) {

@@ -11,7 +11,7 @@ import pt.ist.fenixframework.artifact.FenixFrameworkArtifact;
 import pt.ist.fenixframework.project.DmlFile;
 import pt.ist.fenixframework.project.exception.FenixFrameworkProjectException;
 import pt.ist.fenixframework.pstm.dml.FenixDomainModelWithOCC;
-import pt.ulht.es.cookbook.domain.CookbookManager;
+import pt.ulht.es.cookbook.domain.CookBookManager;
 
 public class PropertiesManager {
 
@@ -56,7 +56,7 @@ public class PropertiesManager {
 				dbUsername = properties.getProperty("db.username");
 				dbPassword = properties.getProperty("db.password");
 				domainModelPaths = new String[0];
-				rootClass = CookbookManager.class;
+				rootClass = CookBookManager.class;
 				errorfIfDeletingObjectNotDisconnected = true;
 			}
 

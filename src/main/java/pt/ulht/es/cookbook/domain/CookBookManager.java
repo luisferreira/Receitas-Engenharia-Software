@@ -7,9 +7,9 @@ import java.util.List;
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulht.es.cookbook.comparators.RecipeDateComparatorLatestFirst;
 
-public class CookbookManager extends CookbookManager_Base {
+public class CookBookManager extends CookBookManager_Base {
     
-    public static CookbookManager getInstance() {
+    public static CookBookManager getInstance() {
         return FenixFramework.getRoot();
     }
     
@@ -44,3 +44,4 @@ public class CookbookManager extends CookbookManager_Base {
 	}
     
 }
+

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pt.ist.fenixframework.pstm.AbstractDomainObject;
-import pt.ulht.es.cookbook.domain.CookbookManager;
+import pt.ulht.es.cookbook.domain.CookBookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
 
 @Controller
@@ -52,7 +52,7 @@ public class RecipeController {
 	/* Show list of recipes */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipe/all")
 	public String showAllRecipes(Model model) {
-		model.addAttribute("recipes", CookbookManager.getOrderedRecipes());
+		model.addAttribute("recipes", CookBookManager.getOrderedRecipes());
 		model.addAttribute("title", "[CookBook] - All recipes");
 		return "listRecipes";
 	}
@@ -67,7 +67,7 @@ public class RecipeController {
 		model.addAttribute("title", "[Cookbook] - Home");
 
 		/* For fill table of last recipes added on show home page */
-		model.addAttribute("recipes", CookbookManager.getLastFiveRecipes());
+		model.addAttribute("recipes", CookBookManager.getLastFiveRecipes());
         return "home";
 	}
 
@@ -101,7 +101,7 @@ public class RecipeController {
 	public String searchRecipes(Model model, @RequestParam("param") String query) {
 		String[] searchParams = query.split(",| ");
 		List<Recipe> resultSet = new ArrayList<Recipe>();
-		for (Recipe recipe : CookbookManager.getInstance().getRecipeSet()) {
+		for (Recipe recipe : CookBookManager.getInstance().getRecipeSet()) {
 			if (recipe.match(searchParams)) {
 				resultSet.add(recipe);
 			}
