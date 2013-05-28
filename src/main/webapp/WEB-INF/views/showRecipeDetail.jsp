@@ -9,21 +9,21 @@
 			</div> 
 		</c:if>
 		<div class="page-header">
-			<h1>${recipe.recipeTitle}</h1>
+			<h1>${recipe.title}</h1>
 		</div>
 		<div class="row-fluid">
 			<div class="span5">
 				<div>
 					<p class="lead">The problem:</p>
 					<div class="well">
-						${recipe.recipeProblemDescription}
+						${recipe.problem}
 					</div>
 				</div>
 				<div class="row">&nbsp;</div>
 				<div>
 					<p class="lead">The solution:</p>
 					<div class="well">
-						${recipe.recipeSolutionDescription}
+						${recipe.solution}
 					</div>
 				</div>
 			</div>
@@ -39,9 +39,9 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>${recipe.recipeVersion}</td>
+							<td><%-- ${recipe.recipeVersion} --%></td>
 							<td>${recipe.formatedCreationDate}</td>
-							<td>${recipe.recipeAuthor}</td>
+							<td>${recipe.author}</td>
 						</tr>
 					</tbody>
 				</table>

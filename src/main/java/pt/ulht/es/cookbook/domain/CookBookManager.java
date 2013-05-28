@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import pt.ist.fenixframework.FenixFramework;
-import pt.ulht.es.cookbook.comparators.RecipeDateComparatorLatestFirst;
 
 public class CookBookManager extends CookBookManager_Base {
     
@@ -20,18 +19,15 @@ public class CookBookManager extends CookBookManager_Base {
 			allRecipes.add(recipe);
 		}
 			
-		Collections.sort(allRecipes);
+		//Collections.sort(allRecipes);
 
 		return allRecipes;
 	}
 
 	public static List<Recipe> getLastFiveRecipes() {
-		ArrayList<Recipe> allRecipes = new ArrayList<Recipe>();
+		ArrayList<Recipe> allRecipes = new ArrayList<Recipe>(getInstance().getRecipeSet());
 
-		for (Recipe recipe : getInstance().getRecipeSet()) {
-			allRecipes.add(recipe);
-		}
-		Collections.sort(allRecipes, new RecipeDateComparatorLatestFirst());
+		Collections.sort(allRecipes);
 		int collectionSize = allRecipes.size();
 
 		if (collectionSize > 4) {

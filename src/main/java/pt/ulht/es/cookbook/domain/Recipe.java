@@ -1,37 +1,27 @@
 package pt.ulht.es.cookbook.domain;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import org.joda.time.DateTime;
 
 public class Recipe extends Recipe_Base implements Comparable<Recipe>{
     
-    public  Recipe(String recipetitle, String recipeProblemDescription, String recipeSolutionDescription, String recipeAuthor) {
-    	setTitle(recipetitle);
-    	setProblem(recipeProblemDescription);
-    	setSolution(recipeSolutionDescription);
-    	setAuthor(recipeAuthor);
-    	setCreationTimestamp(new DateTime());    	
+    public Recipe(String recipetitle, String recipeProblemDescription, String recipeSolutionDescription, String recipeAuthor) {
+    	RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor);
+    	addRecipeVersion(version);
     	setCookbookManager(CookBookManager.getInstance());
     }
     
+    public RecipeVersion getLastVersion(){
+    	List<RecipeVersion> list = new ArrayList<RecipeVersion>(getRecipeVersionSet());
+    	Collections.sort(list);
+    	return list.get(0);
+    }
+
 	public int compareTo(Recipe o) {
-		return this.getTitle().toLowerCase().compareTo(o.getTitle().toLowerCase());
-	}
-		
-	public boolean match(String[] words){
-		boolean found = false;
-		for(String word : words){
-			if (this.getTitle().toLowerCase().contains(word.toLowerCase())) {
-				found = true;
-				break;
-			}
-		}
-		return found;
-	}
+		return getLastVersion().getTitle().toLowerCase().compareTo(o.getLastVersion().getTitle().toLowerCase());
 	
-	public String getFormatedCreationDate() {
-		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-		return format.format(getCreationTimestamp());
 	}
+    
 }

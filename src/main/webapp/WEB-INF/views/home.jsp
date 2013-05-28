@@ -26,7 +26,7 @@
 				<tbody data-provides="rowlink">
 					<c:forEach var="recipe" items='${recipes}'>
 						<tr>
-							<td><a class="rowlink" href="/recipe/${recipe.id}">${recipe.recipeTitle}</a></td>
+							<td><a class="rowlink" href="/recipe/${recipe.idInternal}">${recipe.lastVersion.title}</a></td>
 							<td>${recipe.recipeProblemDescription}</td>
 							<td>${recipe.recipeAuthor}</td>
 							<td>${recipe.formatedCreationDate}</td>

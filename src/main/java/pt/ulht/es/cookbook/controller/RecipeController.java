@@ -31,7 +31,7 @@ public class RecipeController {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
 		
 		if (recipe != null) {
-			model.addAttribute("title", "[CookBook] - " + recipe.getTitle());
+			model.addAttribute("title", "[CookBook] - " + recipe.getLastVersion().getTitle());
 			model.addAttribute("recipe", recipe);
 			try {
 				if ((Boolean) model.asMap().get("creation")){
@@ -101,11 +101,11 @@ public class RecipeController {
 	public String searchRecipes(Model model, @RequestParam("param") String query) {
 		String[] searchParams = query.split(",| ");
 		List<Recipe> resultSet = new ArrayList<Recipe>();
-		for (Recipe recipe : CookBookManager.getInstance().getRecipeSet()) {
-			if (recipe.match(searchParams)) {
-				resultSet.add(recipe);
-			}
-		}
+//		for (Recipe recipe : CookBookManager.getInstance().getRecipeSet()) {
+//			if (recipe.match(searchParams)) {
+//				resultSet.add(recipe);
+//			}
+//		}
 		model.addAttribute("searchQuery", StringUtils.join(searchParams,", "));
 		model.addAttribute("recipes", resultSet);
 	
