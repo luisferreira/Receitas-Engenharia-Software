@@ -21,7 +21,17 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe>{
 
 	public int compareTo(Recipe o) {
 		return getLastVersion().getTitle().toLowerCase().compareTo(o.getLastVersion().getTitle().toLowerCase());
-	
 	}
-    
+
+	public void delete(Recipe recipe) {
+	
+		removeCookbookManager();
+		
+		for (RecipeVersion version : recipe.getRecipeVersion()) {
+			version.delete();
+		}
+		
+		super.deleteDomainObject();
+	}   
+	
 }

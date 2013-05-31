@@ -49,6 +49,26 @@ public class RecipeController {
 
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/recipe/{id}/delete")
+	public String deleteRecipe(Model model, @PathVariable String id) {
+		Recipe recipe = AbstractDomainObject.fromExternalId(id);
+		
+		recipe.delete(recipe);
+		
+		return "redirect:/recipe/all";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/recipe/{id}/edit")
+	public String editRecipe(Model model, @PathVariable String id) {
+		Recipe recipe = AbstractDomainObject.fromExternalId(id);
+		
+		//Necessário ajustar o destino
+		model.addAttribute("recipe", recipe);
+		
+		return "editRecipe";
+	}
+
+	
 	/* Show list of recipes */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipe/all")
 	public String showAllRecipes(Model model) {
@@ -82,17 +102,15 @@ public class RecipeController {
 	@RequestMapping(method = RequestMethod.POST, value = "/recipe/create")
 	public String createRecipe(@RequestParam Map<String, String> params, RedirectAttributes attr) {
 		String recipetitle = params.get("recipetitle");
-		String recipeProblemDescription = params
-				.get("recipeProblemDescription");
-		String recipeSolutionDescription = params
-				.get("recipeSolutionDescription");
+		String recipeProblemDescription = params.get("recipeProblemDescription");
+		String recipeSolutionDescription = params.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
-		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription,
-				recipeSolutionDescription, recipeAuthor);
+		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
 		
 		
 		attr.addFlashAttribute("creation", true);
 
+		System.out.println("ID da Receita criada: " + recipe.getExternalId());
 		return "redirect:/recipe/" + recipe.getExternalId();
 	}
 	

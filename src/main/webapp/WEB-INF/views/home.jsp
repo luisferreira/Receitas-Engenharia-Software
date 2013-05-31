@@ -26,10 +26,10 @@
 				<tbody data-provides="rowlink">
 					<c:forEach var="recipe" items='${recipes}'>
 						<tr>
-							<td><a class="rowlink" href="/recipe/${recipe.idInternal}">${recipe.lastVersion.title}</a></td>
-							<td>${recipe.recipeProblemDescription}</td>
-							<td>${recipe.recipeAuthor}</td>
-							<td>${recipe.formatedCreationDate}</td>
+							<td><a class="rowlink" href="/recipe/${recipe.externalId}">${recipe.lastVersion.title}</a></td>
+							<td>${recipe.lastVersion.problem}</td>
+							<td>${recipe.lastVersion.author}</td>
+							<td>${recipe.lastVersion.creationTimestamp}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

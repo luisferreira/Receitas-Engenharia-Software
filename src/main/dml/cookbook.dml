@@ -10,7 +10,6 @@ class RecipeVersion {
 	String solution;
 	String author;
 	String tags;
-	
 	DateTime creationTimestamp;
 }
 
@@ -25,10 +24,10 @@ relation CookbookManagerHasManyRecipes {
 
 relation RecipeHasManyRecipeVersions {
 	Recipe playsRole recipe { multiplicity 1..1; }
-	RecipeVersion playsRole recipeVersion { multiplicity 1..*; }
+	RecipeVersion playsRole recipeVersion { multiplicity 0..*; }
 }	
 
 relation RecipeHasManyTags {
-	Recipe playsRole recipe { multiplicity 1..1; }
+	RecipeVersion playsRole recipeVersion { multiplicity 0..*; }
 	Tag playsRole tag { multiplicity 0..*; }
 }

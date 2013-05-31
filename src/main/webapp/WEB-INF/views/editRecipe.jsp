@@ -1,16 +1,16 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <div class="container">
 	<div class="page-header">
-		<h1>Create new recipe</h1>
+		<h1>Edit Recipe</h1>
 		<p>Know something and want to share with the world?</p>
 		<p>Go ahead, show your software-fu!</p>
 	</div>
-	<form class="form-horizontal" method="post" action="/recipe/create">
+	<form class="form-horizontal" method="post" action="/recipe/${recipe.externalÎd}">
 		<div class="control-group">
 			<label class="control-label" for="recipetitle">Title *</label>
 			<div class="controls">
 				<input type="text" class="input-xxlarge" id="recipetitle"
-					name="recipetitle" placeholder="How to do an infinite loop"
+					name="recipetitle" value="${recipe.lastVersion.title}" placeholder="How to do an infinite loop"
 					required>
 			</div>
 		</div>
