@@ -124,7 +124,7 @@ public class RecipeController {
 		attr.addFlashAttribute("creation", true);
 
 		System.out.println("ID da Receita Alterada: " + recipe.getExternalId());
-		 return "home";
+		 return "redirect:/";
 	}
 	
 	/* simple search for recipe title */
