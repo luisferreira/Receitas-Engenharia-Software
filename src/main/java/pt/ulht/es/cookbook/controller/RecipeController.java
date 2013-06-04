@@ -107,11 +107,24 @@ public class RecipeController {
 		String recipeAuthor = params.get("recipeAuthor");
 		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
 		
-		
 		attr.addFlashAttribute("creation", true);
 
 		System.out.println("ID da Receita criada: " + recipe.getExternalId());
 		return "redirect:/recipe/" + recipe.getExternalId();
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/recipe/edit")
+	public String EditRecipe(@RequestParam Map<String, String> params, RedirectAttributes attr) {
+		String recipetitle = params.get("recipetitle");
+		String recipeProblemDescription = params.get("recipeProblemDescription");
+		String recipeSolutionDescription = params.get("recipeSolutionDescription");
+		String recipeAuthor = params.get("recipeAuthor");
+		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
+		
+		attr.addFlashAttribute("creation", true);
+
+		System.out.println("ID da Receita Alterada: " + recipe.getExternalId());
+		 return "home";
 	}
 	
 	/* simple search for recipe title */
