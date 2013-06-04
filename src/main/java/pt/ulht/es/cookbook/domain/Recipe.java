@@ -24,7 +24,6 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe>{
 	}
 
 	public void delete(Recipe recipe) {
-	
 		removeCookbookManager();
 		
 		for (RecipeVersion version : recipe.getRecipeVersion()) {
@@ -32,6 +31,5 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe>{
 		}
 		
 		super.deleteDomainObject();
-	}   
-	
+	} 	
 }

@@ -16,7 +16,7 @@
 						<a class="btn btn-primary" href="/recipe/create">Create a recipe yourself!</a>
 					</c:when>
 					<c:otherwise>
-						<h1>Recipes found with ${searchQuery}:</h1>
+						<h1>Recipes found with keyword "${searchQuery}" :</h1>
 						<table class="table table-striped table-bordered">
 							<thead>
 								<tr>
@@ -30,11 +30,11 @@
 							<tbody data-provides="rowlink">
 								<c:forEach var="recipe" items='${recipes}'>
 									<tr>
-										<td><a class="rowlink" href="/recipe/${recipe.id}">${recipe.recipeTitle}</a></td>
-										<td>${recipe.recipeProblemDescription}</td>
-										<td>${recipe.recipeAuthor}</td>
-										<td>${recipe.formatedCreationDate}</td>
-										<td>${recipe.id}</td>
+										<td><a class="rowlink" href="/recipe/${recipe.externalId}">${recipe.lastVersion.title}</a></td>
+										<td>${recipe.lastVersion.problem}</td>
+										<td>${recipe.lastVersion.author}</td>
+										<td>${recipe.lastVersion.creationTimestamp}</td>
+										<td>${recipe.externalId}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

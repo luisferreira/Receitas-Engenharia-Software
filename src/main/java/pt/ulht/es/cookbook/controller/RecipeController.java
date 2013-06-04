@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookBookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
+import pt.ulht.es.cookbook.domain.RecipeVersion;
 
 @Controller
 public class RecipeController {
@@ -132,14 +133,22 @@ public class RecipeController {
 	public String searchRecipes(Model model, @RequestParam("param") String query) {
 		String[] searchParams = query.split(",| ");
 		List<Recipe> resultSet = new ArrayList<Recipe>();
-//		for (Recipe recipe : CookBookManager.getInstance().getRecipeSet()) {
-//			if (recipe.match(searchParams)) {
-//				resultSet.add(recipe);
-//			}
-//		}
+			
+		//itera todas as recipes
+		for (Recipe recipe : CookBookManager.getOrderedRecipes()) {
+			
+			Recipe recipe1 = recipe;
+			
+			//itera todas as keywords de pesquisa
+			for (int i=0; i< searchParams.length;i++){				
+				if (recipe1.getLastVersion().getTitle().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim())){
+					resultSet.add(recipe);
+				}
+			}				
+		}
 		model.addAttribute("searchQuery", StringUtils.join(searchParams,", "));
 		model.addAttribute("recipes", resultSet);
-	
+
 		return "searchRecipe";
 	}
 }

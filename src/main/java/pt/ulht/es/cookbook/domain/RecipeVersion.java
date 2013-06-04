@@ -15,7 +15,7 @@ public class RecipeVersion extends RecipeVersion_Base implements
 		setAuthor(recipeAuthor);
 		setCreationTimestamp(new DateTime());
 	}
-
+	
 	public int compareTo(RecipeVersion o) {
 		return getCreationTimestamp().compareTo(o.getCreationTimestamp());
 	}

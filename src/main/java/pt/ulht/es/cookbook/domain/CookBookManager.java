@@ -19,8 +19,6 @@ public class CookBookManager extends CookBookManager_Base {
 			allRecipes.add(recipe);
 		}
 			
-		//Collections.sort(allRecipes);
-
 		return allRecipes;
 	}
 
