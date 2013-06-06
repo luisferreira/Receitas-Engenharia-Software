@@ -108,19 +108,24 @@ public class RecipeController {
 		String recipeAuthor = params.get("recipeAuthor");
 		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
 		
+		recipe.addVersion(version);
+		
 		attr.addFlashAttribute("creation", true);
 
 		System.out.println("ID da Receita criada: " + recipe.getExternalId());
 		return "redirect:/recipe/" + recipe.getExternalId();
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/recipe/edit")
-	public String EditRecipe(@RequestParam Map<String, String> params, RedirectAttributes attr) {
+	@RequestMapping(method = RequestMethod.POST, value = "/recipe/{id}/edit")
+	public String EditRecipe(@RequestParam Map<String, String> params, RedirectAttributes attr,  @PathVariable String id) {
+		Recipe recipe = AbstractDomainObject.fromExternalId(id);
 		String recipetitle = params.get("recipetitle");
 		String recipeProblemDescription = params.get("recipeProblemDescription");
 		String recipeSolutionDescription = params.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
-		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
+		RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
+		
+		recipe.
 		
 		attr.addFlashAttribute("creation", true);
 
