@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">	
-		<c:if test="${creationMessage eq 'creation' || creationMessage eq 'update'}">
+		<c:if test="${(creationMessage eq 'creation') || (creationMessage eq 'update')}">
 			<div class="span12 pagination-centered">
 				<div id="saveSuccessMessage" class = "alert alert-success fade in" data-alert = "alert">
   					<a class="close" href="#">×</a>

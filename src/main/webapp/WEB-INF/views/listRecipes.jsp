@@ -1,5 +1,13 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
+		<c:if test="${deletionMessage eq 'delete'}">
+			<div class="span12 pagination-centered">
+				<div id="saveSuccessMessage" class = "alert alert-success fade in" data-alert = "alert">
+  					<a class="close" href="#">×</a>
+					<p>Recipe deleted!</p>
+				</div>
+			</div> 
+		</c:if>
 		<div>
 			<div>
 				<c:choose>

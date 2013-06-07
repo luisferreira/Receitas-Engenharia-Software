@@ -22,10 +22,40 @@ import pt.ulht.es.cookbook.domain.RecipeVersion;
 
 @Controller
 public class RecipeController {
+	
+	/*************
+	 *   ROOT
+	 *************/
+	
 
-	/*
-	 * Show recipe from id. If recipe with id exists, redirect to
-	 * showRecipeDetail
+	/**
+	 * Shows the home page
+	 * @param model
+	 * @return home view
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/")
+	public String showHomePage(Model model) {
+
+		Date date = new Date(System.currentTimeMillis());
+		DateFormat df = DateFormat.getDateInstance();
+		model.addAttribute("currentTime", df.format(date));
+		model.addAttribute("title", "[Cookbook] - Home");
+
+		/* For fill table of last recipes added on show home page */
+		model.addAttribute("recipes", CookBookManager.getLastFiveRecipes());
+        return "home";
+	}
+	
+	
+	/*************
+	 *   SHOW ROUTES
+	 *************/
+
+	/**
+	 * Shows a specific recipe
+	 * @param model
+	 * @param id
+	 * @return recipe detail view
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipe/{id}")
 	public String showRecipe(Model model, @PathVariable String id) {
@@ -50,20 +80,66 @@ public class RecipeController {
 			model.addAttribute("title", "[CookBook] - Recipe not found");
 			return "recipeNotFound";
 		}
-
 	}
+	
+	/**
+	 * Shows a list of all recipes
+	 * @param model
+	 * @return all recipes view
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/recipe/all")
+	public String showAllRecipes(Model model) {
+		model.addAttribute("recipes", CookBookManager.getOrderedRecipes());
+		model.addAttribute("title", "[CookBook] - All recipes");
+		
+		try {
+			if ((Boolean) model.asMap().get("delete")){
+				model.addAttribute("deleteonMessage", "deleted");
+			}
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		} 
+		
+		return "listRecipes";
+	}
+	
+	
+	
+	
+	/*************
+	 *   DELETE ROUTES
+	 *************/
 
-	/* delete a recipe */
+	/**
+	 * Deletes a recipe and all versions
+	 * @param model
+	 * @param id
+	 * @param attr
+	 * @return 
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipe/{id}/delete")
-	public String deleteRecipe(Model model, @PathVariable String id) {
+	public String deleteRecipe(Model model, @PathVariable String id, RedirectAttributes attr) {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
 		
 		recipe.delete(recipe);
 		
+		attr.addFlashAttribute("delete", true);
+		
 		return "redirect:/recipe/all";
 	}
 	
-	/* show edit page */
+	
+	
+	/*************
+	 *   EDIT ROUTES
+	 *************/
+	
+	/**
+	 * Shows recipe edit form
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipe/{id}/edit")
 	public String editRecipe(Model model, @PathVariable String id) {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
@@ -74,54 +150,13 @@ public class RecipeController {
 		return "editRecipe";
 	}
 
-	
-	/* Show list of recipes */
-	@RequestMapping(method = RequestMethod.GET, value = "/recipe/all")
-	public String showAllRecipes(Model model) {
-		model.addAttribute("recipes", CookBookManager.getOrderedRecipes());
-		model.addAttribute("title", "[CookBook] - All recipes");
-		return "listRecipes";
-	}
-
-	/* show home page */
-	@RequestMapping(method = RequestMethod.GET, value = "/")
-	public String showHomePage(Model model) {
-
-		Date date = new Date(System.currentTimeMillis());
-		DateFormat df = DateFormat.getDateInstance();
-		model.addAttribute("currentTime", df.format(date));
-		model.addAttribute("title", "[Cookbook] - Home");
-
-		/* For fill table of last recipes added on show home page */
-		model.addAttribute("recipes", CookBookManager.getLastFiveRecipes());
-        return "home";
-	}
-
-	/* Show new recipe form */
-	@RequestMapping(method = RequestMethod.GET, value = "/recipe/create")
-	public String showRecipeCreationForm(Model model) {
-		model.addAttribute("title", "[CookBook] - Create new recipe");
-		return "newRecipe";
-	}
-	
-	/* Create recipe and redirect to ShowRecipeDetail "/recipes/{id}" */
-	@RequestMapping(method = RequestMethod.POST, value = "/recipe/create")
-	public String createRecipe(@RequestParam Map<String, String> params, RedirectAttributes attr) {
-		String recipetitle = params.get("recipetitle");
-		String recipeProblemDescription = params.get("recipeProblemDescription");
-		String recipeSolutionDescription = params.get("recipeSolutionDescription");
-		String recipeAuthor = params.get("recipeAuthor");
-		//RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
-		
-		//Recipe recipe = AbstractDomainObject.fromExternalId(id);
-		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor);
-		//recipe.addRecipeVersion(version);
-		
-		attr.addFlashAttribute("creation", true);
-
-		return "redirect:/recipe/" + recipe.getExternalId();
-	}
-	
+	/**
+	 * Edits a recipe version
+	 * @param params
+	 * @param attr
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/recipe/{id}/edit")
 	public String EditRecipe(@RequestParam Map<String, String> params, RedirectAttributes attr,  @PathVariable String id) {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
@@ -135,11 +170,56 @@ public class RecipeController {
 		
 		attr.addFlashAttribute("update", true);
 
-		System.out.println("ID Parametro: " + id + "\nID da Receita: " + recipe.getExternalId() + "\nID Versao: " + version.getExternalId());
 		return "redirect:/recipe/" + id;
 	}
 	
-	/* simple search for recipe title */
+
+	/*************
+	 *   CREATION ROUTES
+	 *************/
+
+	/**
+	 * Show recipe creation form
+	 * @param model
+	 * @return recipe creation form
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/recipe/create")
+	public String showRecipeCreationForm(Model model) {
+		model.addAttribute("title", "[CookBook] - Create new recipe");
+		return "newRecipe";
+	}
+	
+	/**
+	 * Creates and persists a recipe
+	 * @param params
+	 * @param attr
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST, value = "/recipe/create")
+	public String createRecipe(@RequestParam Map<String, String> params, RedirectAttributes attr) {
+		String recipetitle = params.get("recipetitle");
+		String recipeProblemDescription = params.get("recipeProblemDescription");
+		String recipeSolutionDescription = params.get("recipeSolutionDescription");
+		String recipeAuthor = params.get("recipeAuthor");
+		
+		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor);
+		
+		attr.addFlashAttribute("creation", true);
+
+		return "redirect:/recipe/" + recipe.getExternalId();
+	}
+	
+	
+	/*************
+	 *   SEARCH ROUTES
+	 *************/
+	
+	/**
+	 * Shows the search results
+	 * @param model
+	 * @param query
+	 * @return
+	 */
 	@RequestMapping (method = RequestMethod.POST, value = "/recipe/search")
 	public String searchRecipes(Model model, @RequestParam("param") String query) {
 		String[] searchParams = query.split(",| ");
