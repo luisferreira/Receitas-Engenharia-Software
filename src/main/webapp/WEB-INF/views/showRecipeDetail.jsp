@@ -29,7 +29,7 @@
 			<div>
 				<p class="lead">Tags:</p>
 				<c:choose>
-					<c:when test="${empty tags}">
+					<c:when test="${empty recipe.lastVersion.getTagSet()}">
 						<div class="well">Recipe not tagged yet...</div>
 					</c:when>
 					<c:otherwise>
