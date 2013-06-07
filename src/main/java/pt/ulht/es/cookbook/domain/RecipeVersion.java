@@ -1,7 +1,5 @@
 package pt.ulht.es.cookbook.domain;
 
-import java.text.SimpleDateFormat;
-
 import org.joda.time.DateTime;
 
 public class RecipeVersion extends RecipeVersion_Base implements
@@ -14,6 +12,7 @@ public class RecipeVersion extends RecipeVersion_Base implements
 		setSolution(recipeSolutionDescription);
 		setAuthor(recipeAuthor);
 		setCreationTimestamp(new DateTime());
+		
 	}
 	
 	public int compareTo(RecipeVersion o) {

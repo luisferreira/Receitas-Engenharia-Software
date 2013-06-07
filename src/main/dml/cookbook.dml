@@ -22,6 +22,11 @@ relation CookbookManagerHasManyRecipes {
 	Recipe playsRole recipe { multiplicity 0..*; }
 }	
 
+relation CookbookManagerHasManyTags {
+	CookBookManager playsRole cookbookManager { multiplicity 1..1; }
+	Tag playsRole tag { multiplicity 0..*; }
+}
+
 relation RecipeHasManyRecipeVersions {
 	Recipe playsRole recipe { multiplicity 1..1; }
 	RecipeVersion playsRole recipeVersion { multiplicity 0..*; }

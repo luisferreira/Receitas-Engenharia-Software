@@ -19,6 +19,7 @@ import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookBookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
 import pt.ulht.es.cookbook.domain.RecipeVersion;
+import pt.ulht.es.cookbook.domain.Tag;
 
 @Controller
 public class RecipeController {
@@ -76,7 +77,6 @@ public class RecipeController {
 			}
 			return "showRecipeDetail";
 		} else {
-			//TODO: se o creationMessage vem como success, mas a recipe não existe, redirect para a pagina de criação com msg de erro
 			model.addAttribute("title", "[CookBook] - Recipe not found");
 			return "recipeNotFound";
 		}
@@ -201,8 +201,15 @@ public class RecipeController {
 		String recipeProblemDescription = params.get("recipeProblemDescription");
 		String recipeSolutionDescription = params.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
+		String tags = params.get("recipeTags");
+		String[] tokens = tags.split(", ");
+		
 		
 		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor);
+		RecipeVersion version = recipe.getLastVersion();
+		for(String token : tokens){
+			version.addTag(Tag.fromString(token));
+		}
 		
 		attr.addFlashAttribute("creation", true);
 
