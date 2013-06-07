@@ -65,8 +65,6 @@ public class RecipeController {
 		if (recipe != null) {
 			model.addAttribute("title", "[CookBook] - " + recipe.getLastVersion().getTitle());
 			model.addAttribute("recipe", recipe);
-			model.addAttribute("versions", recipe.getRecipeVersionSet());
-			model.addAttribute("tags", recipe.getLastVersion().getTagSet());
 			try {
 				if ((Boolean) model.asMap().get("creation")){
 					model.addAttribute("creationMessage", "creation");
@@ -203,7 +201,7 @@ public class RecipeController {
 		String recipeSolutionDescription = params.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
 		String tags = params.get("recipeTags");
-		String[] tokens = tags.split(", ");
+		String[] tokens = tags.split(",");
 		
 		
 		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor);

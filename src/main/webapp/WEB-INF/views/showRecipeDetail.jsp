@@ -26,6 +26,21 @@
 				<p class="lead">The solution:</p>
 				<div class="well">${recipe.lastVersion.solution}</div>
 			</div>
+			<div>
+				<p class="lead">Tags:</p>
+				<c:choose>
+					<c:when test="${empty tags}">
+						<div class="well">Recipe not tagged yet...</div>
+					</c:when>
+					<c:otherwise>
+					<div class= "hero-unit well">
+						<c:forEach var="tag" items='${recipe.lastVersion.getTagSet()}'>
+								<span class="label label-warning">${tag.tag} </span>
+						</c:forEach>
+					</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
 			<a href="#" class="confirm-delete btn btn-primary" data-toggle="modal">Delete Recipe</a> 
 			<a href="/recipe/${recipe.externalId}/edit" class="btn btn-primary"> Edit Recipe</a>
 		</div>
