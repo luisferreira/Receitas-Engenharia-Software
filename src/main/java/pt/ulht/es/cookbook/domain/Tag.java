@@ -2,8 +2,9 @@ package pt.ulht.es.cookbook.domain;
 
 public class Tag extends Tag_Base {
     
-    public  Tag() {
-        super();
+    private  Tag(String tag) {
+        setTag(tag);
+        setCookbookManager(CookBookManager.getInstance());
     }
 
 	public static Tag fromString(String token) {
@@ -11,9 +12,7 @@ public class Tag extends Tag_Base {
 			if (t.getTag().equalsIgnoreCase(token))
 				return t;
 		}
-		Tag t = new Tag();
-		t.setTag(token);
-		return t;
+		return new Tag(token);
 	}
     
 }
