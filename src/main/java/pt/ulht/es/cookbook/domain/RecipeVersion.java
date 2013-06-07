@@ -1,5 +1,6 @@
 package pt.ulht.es.cookbook.domain;
 
+import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 
 public class RecipeVersion extends RecipeVersion_Base implements
@@ -47,5 +48,10 @@ public class RecipeVersion extends RecipeVersion_Base implements
 		
 		super.deleteDomainObject();
 		
+	}
+	
+	public String getTagsAsStrings()
+	{
+		return StringUtils.join(getTagSet(), ","); 
 	}
 }
