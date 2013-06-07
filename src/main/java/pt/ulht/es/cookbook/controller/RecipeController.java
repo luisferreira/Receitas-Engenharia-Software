@@ -66,6 +66,7 @@ public class RecipeController {
 			model.addAttribute("title", "[CookBook] - " + recipe.getLastVersion().getTitle());
 			model.addAttribute("recipe", recipe);
 			model.addAttribute("versions", recipe.getRecipeVersionSet());
+			model.addAttribute("tags", recipe.getLastVersion().getTagSet());
 			try {
 				if ((Boolean) model.asMap().get("creation")){
 					model.addAttribute("creationMessage", "creation");
