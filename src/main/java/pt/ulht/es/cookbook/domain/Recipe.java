@@ -16,7 +16,7 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe>{
     public RecipeVersion getLastVersion(){
     	List<RecipeVersion> list = new ArrayList<RecipeVersion>(getRecipeVersionSet());
     	Collections.sort(list);
-    	return list.get(0);
+    	return list.get(list.size()-1);
     }
 
 	public int compareTo(Recipe o) {

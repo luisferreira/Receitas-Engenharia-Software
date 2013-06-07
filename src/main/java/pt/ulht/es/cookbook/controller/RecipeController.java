@@ -34,9 +34,12 @@ public class RecipeController {
 		if (recipe != null) {
 			model.addAttribute("title", "[CookBook] - " + recipe.getLastVersion().getTitle());
 			model.addAttribute("recipe", recipe);
+			model.addAttribute("versions", recipe.getRecipeVersionSet());
 			try {
 				if ((Boolean) model.asMap().get("creation")){
-					model.addAttribute("creationMessage", "success");
+					model.addAttribute("creationMessage", "creation");
+				} else if ((Boolean) model.asMap().get("update")){
+					model.addAttribute("creationMessage", "update");
 				}
 			} catch (Exception e) {
 				System.out.println(e.getLocalizedMessage());
@@ -50,6 +53,7 @@ public class RecipeController {
 
 	}
 
+	/* delete a recipe */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipe/{id}/delete")
 	public String deleteRecipe(Model model, @PathVariable String id) {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
@@ -59,6 +63,7 @@ public class RecipeController {
 		return "redirect:/recipe/all";
 	}
 	
+	/* show edit page */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipe/{id}/edit")
 	public String editRecipe(Model model, @PathVariable String id) {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
@@ -106,13 +111,14 @@ public class RecipeController {
 		String recipeProblemDescription = params.get("recipeProblemDescription");
 		String recipeSolutionDescription = params.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
-		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
+		//RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
 		
-		recipe.addVersion(version);
+		//Recipe recipe = AbstractDomainObject.fromExternalId(id);
+		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor);
+		//recipe.addRecipeVersion(version);
 		
 		attr.addFlashAttribute("creation", true);
 
-		System.out.println("ID da Receita criada: " + recipe.getExternalId());
 		return "redirect:/recipe/" + recipe.getExternalId();
 	}
 	
@@ -125,12 +131,12 @@ public class RecipeController {
 		String recipeAuthor = params.get("recipeAuthor");
 		RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
 		
-		recipe.
+		recipe.addRecipeVersion(version);
 		
-		attr.addFlashAttribute("creation", true);
+		attr.addFlashAttribute("update", true);
 
-		System.out.println("ID da Receita Alterada: " + recipe.getExternalId());
-		 return "redirect:/";
+		System.out.println("ID Parametro: " + id + "\nID da Receita: " + recipe.getExternalId() + "\nID Versao: " + version.getExternalId());
+		return "redirect:/recipe/" + id;
 	}
 	
 	/* simple search for recipe title */

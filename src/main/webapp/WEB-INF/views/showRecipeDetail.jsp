@@ -1,10 +1,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">	
-		<c:if test="${creationMessage eq 'success'}">
+		<c:if test="${creationMessage eq 'creation' || creationMessage eq 'update'}">
 			<div class="span12 pagination-centered">
 				<div id="saveSuccessMessage" class = "alert alert-success fade in" data-alert = "alert">
   					<a class="close" href="#">×</a>
-					<p>Recipe created!</p>
+					<p>${creationMessage eq "creation" ? "Recipe created!" : "Recipe updated!"}</p>
 				</div>
 			</div> 
 		</c:if>
@@ -35,15 +35,21 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
+							<th>Version</th>
 							<th>Date</th>
 							<th>Author</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>${recipe.lastVersion.creationTimestamp}</td>
-							<td>${recipe.lastVersion.author}</td>
-						</tr>
+					<tbody data-provides="rowlink">
+						<c:set var="v" value="0" scope="page" />
+						<c:forEach var="version" items='${versions}'>
+							<c:set var="v" value="${v + 1}" scope="page"/>
+							<tr>
+								<td>${v == 1 ? "Current" : v}</td>
+								<td><a class="rowlink" href="/recipe/${recipe.externalId}">${version.getFormatedCreationDate()}</a></td>
+								<td>${recipe.lastVersion.author}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

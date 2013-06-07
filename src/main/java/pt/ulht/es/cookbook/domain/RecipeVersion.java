@@ -32,8 +32,7 @@ public class RecipeVersion extends RecipeVersion_Base implements
 	}
 
 	public String getFormatedCreationDate() {
-		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-		return format.format(getCreationTimestamp());
+		return getCreationTimestamp().toString("MMM dd, yyyy HH:mm:ss");
 	}
 
 	public String getId() {

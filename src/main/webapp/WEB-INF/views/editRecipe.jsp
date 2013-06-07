@@ -5,7 +5,7 @@
 		<p>Know something and want to share with the world?</p>
 		<p>Go ahead, show your software-fu!</p>
 	</div>
-	<form class="form-horizontal" method="post" action="/recipe/edit">
+	<form class="form-horizontal" method="post" action="/recipe/${recipe.externalId}/edit/">
 		<div class="control-group">
 			<label class="control-label" for="recipetitle">Title *</label>
 			<div class="controls">
