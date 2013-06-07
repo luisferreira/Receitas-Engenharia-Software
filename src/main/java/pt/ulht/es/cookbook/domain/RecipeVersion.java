@@ -54,4 +54,5 @@ public class RecipeVersion extends RecipeVersion_Base implements
 	{
 		return StringUtils.join(getTagSet(), ","); 
 	}
+	//TODO: fazer override do tostring
 }
