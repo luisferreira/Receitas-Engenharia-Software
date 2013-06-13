@@ -13,8 +13,8 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe>{
     	setCookbookManager(CookBookManager.getInstance());
     }
     
-    public Recipe(String recipetitle, String recipeProblemDescription, String recipeSolutionDescription, String recipeAuthor, String Tags) {
-    	RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor);
+    public Recipe(String recipetitle, String recipeProblemDescription, String recipeSolutionDescription, String recipeAuthor, String tags) {
+    	RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor, tags);
     	addRecipeVersion(version);
     	setCookbookManager(CookBookManager.getInstance());
     }

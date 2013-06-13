@@ -66,15 +66,18 @@ public class RecipeController {
 		if (recipe != null) {
 			model.addAttribute("title", "[CookBook] - " + recipe.getLastVersion().getTitle());
 			model.addAttribute("recipe", recipe);
-			try {
+			
+			try {				
 				if ((Boolean) model.asMap().get("creation")){
 					model.addAttribute("creationMessage", "creation");
-				} else if ((Boolean) model.asMap().get("update")){
+				} 
+			} catch (Exception e) {}
+			
+			try {				
+				if ((Boolean) model.asMap().get("update")){
 					model.addAttribute("creationMessage", "update");
 				}
-			} catch (Exception e) {
-				System.out.println(e.getLocalizedMessage());
-			}
+			} catch (Exception e) {}
 			return "showRecipeDetail";
 		} else {
 			model.addAttribute("title", "[CookBook] - Recipe not found");
@@ -93,7 +96,6 @@ public class RecipeController {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
 
 		RecipeVersion version = recipe.getVersion(idv);
-		System.out.println(version);
 				
 		if (recipe != null && version != null) {
 			model.addAttribute("title", "[CookBook] - " + version.getTitle() + " [" + version.getCreationTimestamp() +"]");
@@ -106,7 +108,7 @@ public class RecipeController {
 					model.addAttribute("creationMessage", "update");
 				}
 			} catch (Exception e) {
-				System.out.println(e.getLocalizedMessage());
+				System.out.println("ERROR: " + e.getLocalizedMessage());
 			}
 			return "showRecipeVersionDetail";
 		} else {
@@ -127,10 +129,10 @@ public class RecipeController {
 		
 		try {
 			if ((Boolean) model.asMap().get("delete")){
-				model.addAttribute("deleteonMessage", "deleted");
+				model.addAttribute("deletionMessage", "deleted");
 			}
 		} catch (Exception e) {
-			System.out.println(e.getLocalizedMessage());
+			System.out.println("ERROR: " + e.getLocalizedMessage());
 		} 
 		
 		return "listRecipes";
@@ -156,7 +158,7 @@ public class RecipeController {
 		
 		recipe.delete(recipe);
 		
-		attr.addFlashAttribute("delete", true);
+		attr.addFlashAttribute("deletionMessage", "deleted");
 		
 		return "redirect:/recipe/all";
 	}
@@ -255,7 +257,6 @@ public class RecipeController {
 		String recipeSolutionDescription = params.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
 		String tags = params.get("recipeTags");
-		
 		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor, tags);
 		
 		attr.addFlashAttribute("creation", true);

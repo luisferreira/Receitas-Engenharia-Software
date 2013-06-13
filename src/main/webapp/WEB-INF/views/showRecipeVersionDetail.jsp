@@ -13,7 +13,7 @@
 		</div>
 	</c:if>
 	<div class="page-header">
-		<h1>${version.title} - [${version.getFormatedCreationDate()}]</h1>
+		<h1>${version.title} [${version.getFormatedCreationDate()}]</h1>
 	</div>
 	<div class="row-fluid">
 		<div class="span5">
@@ -77,7 +77,7 @@
          <h3>Restore ${version.getFormatedCreationDate()} version </h3>
     </div>
     <div class="modal-body">
-        <p>Are you sure you want to restore the ${getFormatedCreationDate()} version?</p>
+        <p>Are you sure you want to restore the ${version.getFormatedCreationDate()} version?</p>
     </div>
     <div class="modal-footer">
     	<form method="post" action="/recipe/${recipe.externalId}/version/${version.externalId}/restore">
