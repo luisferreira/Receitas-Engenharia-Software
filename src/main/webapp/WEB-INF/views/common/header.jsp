@@ -15,6 +15,29 @@
 		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-responsive.min.css" />
 		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-rowlink.min.css" />
 		<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+       	<link rel="stylesheet" type="text/css" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"/>
+       	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+		<script>
+        $(document).ready(function () {		
+            $("#myInput").on("focus", function() {
+                console.log(this.value);
+                    $(this).tooltip("show");
+            }).tooltip({
+                placement: "bottom",
+                trigger: "manual"
+            });
+            $("#myInput").on("focusout", function() {
+                console.log(this.value);
+                    $(this).tooltip("hide");
+            }).tooltip({
+                placement: "bottom",
+                trigger: "manual"
+            });			
+        });
+        </script>
+		
 	</head>
 	<body>
 		<div id="wrap">
@@ -37,7 +60,7 @@
 								</li>
 							</ul>
 							<form method="POST" action="/recipe/search" class="navbar-search pull-right">
-			    				<input type="text" class="search-query" placeholder="Search" name="param">
+			    				<input id="myInput" title="Comma separated values " type="text" class="search-query" placeholder="Search" name="param"> 
 			    			</form>
 						</div>
 					</div>

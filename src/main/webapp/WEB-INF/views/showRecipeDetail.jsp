@@ -33,7 +33,7 @@
 						<div class="well">no tags</div>
 					</c:when>
 					<c:otherwise>
-					<div class= "hero-unit well">
+					<div class="tag-list">
 						<c:forEach var="tag" items='${recipe.lastVersion.getTagSet()}'>
 								<span class="label label-warning">${tag.tag} </span>
 						</c:forEach>
