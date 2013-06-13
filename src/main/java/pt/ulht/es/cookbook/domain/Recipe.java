@@ -4,15 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 public class Recipe extends Recipe_Base implements Comparable<Recipe>{
-    
-    public Recipe(String recipetitle, String recipeProblemDescription, String recipeSolutionDescription, String recipeAuthor) {
-    	RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor);
-    	addRecipeVersion(version);
-    	setCookbookManager(CookBookManager.getInstance());
-    }
-    
+       
     public Recipe(String recipetitle, String recipeProblemDescription, String recipeSolutionDescription, String recipeAuthor, String tags) {
     	RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor, tags);
     	addRecipeVersion(version);

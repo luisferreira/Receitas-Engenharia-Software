@@ -19,5 +19,4 @@ public class Tag extends Tag_Base {
 	public String toString(){
 		return getTag();
 	}
-    
 }

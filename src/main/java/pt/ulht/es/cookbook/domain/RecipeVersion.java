@@ -7,16 +7,6 @@ public class RecipeVersion extends RecipeVersion_Base implements
 		Comparable<RecipeVersion> {
 
 	public RecipeVersion(String recipetitle, String recipeProblemDescription,
-			String recipeSolutionDescription, String recipeAuthor) {
-		setTitle(recipetitle);
-		setProblem(recipeProblemDescription);
-		setSolution(recipeSolutionDescription);
-		setAuthor(recipeAuthor);
-		setCreationTimestamp(new DateTime());
-		
-	}
-	
-	public RecipeVersion(String recipetitle, String recipeProblemDescription,
 			String recipeSolutionDescription, String recipeAuthor, String tags) {
 		setTitle(recipetitle);
 		setProblem(recipeProblemDescription);

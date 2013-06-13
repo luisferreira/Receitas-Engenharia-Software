@@ -33,9 +33,9 @@
 						<div class="well">no tags</div>
 					</c:when>
 					<c:otherwise>
-					<div class="tag-list">
+					<div class= "hero-unit">
 						<c:forEach var="tag" items='${recipe.lastVersion.getTagSet()}'>
-								<span class="label label-warning">${tag.tag} </span>
+								<span  class="badge badge-info" >${tag.tag} </span>
 						</c:forEach>
 					</div>
 					</c:otherwise>
@@ -71,7 +71,6 @@
 		</div>
 	</div>
 </div>
-
 
 <div id="myModal" class="modal hide">
     <div class="modal-header">
