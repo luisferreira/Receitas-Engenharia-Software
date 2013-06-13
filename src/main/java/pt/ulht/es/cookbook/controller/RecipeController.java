@@ -3,6 +3,8 @@ package pt.ulht.es.cookbook.controller;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -280,17 +282,36 @@ public class RecipeController {
 		String[] searchParams = query.split(",| ");
 		List<Recipe> resultSet = new ArrayList<Recipe>();
 			
-		//itera todas as recipes
-		for (Recipe recipe : CookBookManager.getOrderedRecipes()) {
+		/*Create new recipe list to increase search method by reducing duplicate recipes founded*/
+		List<Recipe> allRecipesToSearch = CookBookManager.getOrderedRecipes();
+		
+		/*Lets iterate recipes to search from parameters inserted by user*/
+	    Iterator<Recipe> itr = allRecipesToSearch.iterator();
+	    while(itr.hasNext()) {
+	    	Recipe recipe = itr.next();    	
+			for (int i=0; i< searchParams.length;i++) {				
+				if (   recipe.getLastVersion().getTitle().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim()) 
+					|| recipe.getLastVersion().getProblem().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim()) 
+					|| recipe.getLastVersion().getSolution().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim())
+					|| recipe.getLastVersion().getAuthor().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim())
+					|| recipe.getLastVersion().getTagsAsStrings().toString().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim()))
+				{
 			
-			Recipe recipe1 = recipe;
-			
-			//itera todas as keywords de pesquisa
-			for (int i=0; i< searchParams.length;i++){				
-				if (recipe1.getLastVersion().getTitle().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim())){
+					/*Add recipe to show on interface*/
 					resultSet.add(recipe);
+					
+					/*Lets remove duplicate recipes to show only unique entries*/
+					List<Recipe> finalResultSet = new ArrayList<Recipe>();
+					HashSet<Recipe> lookup = new HashSet<Recipe>();
+					for (Recipe orignalrecipe : resultSet) {
+					    if (!lookup.contains(orignalrecipe)) {
+					        lookup.add(orignalrecipe);
+					        finalResultSet.add(orignalrecipe);
+					    }
+					}
+					resultSet = finalResultSet;
 				}
-			}				
+			}	
 		}
 		model.addAttribute("searchQuery", StringUtils.join(searchParams,", "));
 		model.addAttribute("recipes", resultSet);
