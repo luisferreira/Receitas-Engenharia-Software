@@ -1,8 +1,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<c:if test="${deletionMessage eq 'delete'}">
+		<c:if test="${deletionMessage eq 'deleted'}">
 			<div class="span12 pagination-centered">
-				<div id="saveSuccessMessage" class = "alert alert-success fade in" data-alert = "alert">
+				<div id="saveSuccessMessage" class = "alert alert-info fade in" data-alert = "alert">
   					<a class="close" href="#">×</a>
 					<p>Recipe deleted!</p>
 				</div>
@@ -25,7 +25,6 @@
 									<th>Problem</th>
 									<th>Author</th>
 									<th>Date Added</th>
-									<th>ID</th>
 								</tr>
 							</thead>
 							<tbody data-provides="rowlink">
@@ -34,8 +33,7 @@
 										<td><a class="rowlink" href="/recipe/${recipe.externalId}">${recipe.lastVersion.title}</a></td>
 										<td>${recipe.lastVersion.problem}</td>
 										<td>${recipe.lastVersion.author}</td>
-										<td>${recipe.lastVersion.creationTimestamp}</td>
-										<td>${recipe.lastVersion.externalId}</td>
+										<td>${recipe.lastVersion.getFormatedCreationDate()}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

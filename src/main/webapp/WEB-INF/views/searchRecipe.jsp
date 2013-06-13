@@ -22,9 +22,9 @@
 								<tr>
 									<th>Name</th>
 									<th>Problem</th>
+									<th>Solution</th>
 									<th>Author</th>
 									<th>Date Added</th>
-									<th>ID</th>
 								</tr>
 							</thead>
 							<tbody data-provides="rowlink">
@@ -32,9 +32,9 @@
 									<tr>
 										<td><a class="rowlink" href="/recipe/${recipe.externalId}">${recipe.lastVersion.title}</a></td>
 										<td>${recipe.lastVersion.problem}</td>
+										<td>${recipe.lastVersion.solution}</td>
 										<td>${recipe.lastVersion.author}</td>
-										<td>${recipe.lastVersion.creationTimestamp}</td>
-										<td>${recipe.externalId}</td>
+										<td>${recipe.lastVersion.getFormatedCreationDate()}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
