@@ -14,5 +14,10 @@ public class Tag extends Tag_Base {
 		}
 		return new Tag(token);
 	}
+	
+	@Override
+	public String toString(){
+		return getTag();
+	}
     
 }

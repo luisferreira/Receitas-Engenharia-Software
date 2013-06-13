@@ -41,7 +41,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<button type="submit" class="btn btn-primary">Save recipe Changes</button>
-				<button type="button" class="btn" onclick="location.href='/'">Cancel</button>
+				<button type="button" class="btn" onclick="location.href='/recipe/${recipe.externalId}'">Cancel</button>
 			</div>
 		</div>
 	</form>

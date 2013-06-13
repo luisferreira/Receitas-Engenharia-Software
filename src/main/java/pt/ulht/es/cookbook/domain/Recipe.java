@@ -13,6 +13,12 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe>{
     	setCookbookManager(CookBookManager.getInstance());
     }
     
+    public Recipe(String recipetitle, String recipeProblemDescription, String recipeSolutionDescription, String recipeAuthor, String Tags) {
+    	RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor);
+    	addRecipeVersion(version);
+    	setCookbookManager(CookBookManager.getInstance());
+    }
+    
     public RecipeVersion getLastVersion(){
     	List<RecipeVersion> list = new ArrayList<RecipeVersion>(getRecipeVersionSet());
     	Collections.sort(list);
@@ -32,4 +38,15 @@ public class Recipe extends Recipe_Base implements Comparable<Recipe>{
 		
 		super.deleteDomainObject();
 	} 	
+	
+	public RecipeVersion getVersion(String id){
+		RecipeVersion version = null;
+		for(RecipeVersion v : this.getRecipeVersionSet()){
+			if (v.getExternalId().equals(id)){
+				version = v;
+				break;
+			}				
+		}
+		return version;
+	}
 }

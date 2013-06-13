@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -82,6 +83,39 @@ public class RecipeController {
 	}
 	
 	/**
+	 * Shows a specific recipe version
+	 * @param model
+	 * @param id
+	 * @return recipe detail view
+	 */
+	@RequestMapping(method = RequestMethod.GET, value = "/recipe/{id}/version/{idv}")
+	public String showRecipeVersion(Model model, @PathVariable String id, @PathVariable String idv) {
+		Recipe recipe = AbstractDomainObject.fromExternalId(id);
+
+		RecipeVersion version = recipe.getVersion(idv);
+		System.out.println(version);
+				
+		if (recipe != null && version != null) {
+			model.addAttribute("title", "[CookBook] - " + version.getTitle() + " [" + version.getCreationTimestamp() +"]");
+			model.addAttribute("recipe", recipe);
+			model.addAttribute("version", version);
+			try {
+				if ((Boolean) model.asMap().get("creation")){
+					model.addAttribute("creationMessage", "creation");
+				} else if ((Boolean) model.asMap().get("update")){
+					model.addAttribute("creationMessage", "update");
+				}
+			} catch (Exception e) {
+				System.out.println(e.getLocalizedMessage());
+			}
+			return "showRecipeVersionDetail";
+		} else {
+			model.addAttribute("title", "[CookBook] - Recipe not found");
+			return "recipeNotFound";
+		}
+	}
+	
+	/**
 	 * Shows a list of all recipes
 	 * @param model
 	 * @return all recipes view
@@ -140,7 +174,7 @@ public class RecipeController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/recipe/{id}/edit")
-	public String editRecipe(Model model, @PathVariable String id) {
+	public String showEditRecipe(Model model, @PathVariable String id) {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
 		
 		//Necessário ajustar o destino
@@ -150,20 +184,21 @@ public class RecipeController {
 	}
 
 	/**
-	 * Edits a recipe version
+	 * Restores a recipe version
 	 * @param params
 	 * @param attr
 	 * @param id
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/recipe/{id}/edit")
-	public String EditRecipe(@RequestParam Map<String, String> params, RedirectAttributes attr,  @PathVariable String id) {
+	public String editRecipe(@RequestParam Map<String, String> params, RedirectAttributes attr,  @PathVariable String id) {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
 		String recipetitle = params.get("recipetitle");
 		String recipeProblemDescription = params.get("recipeProblemDescription");
 		String recipeSolutionDescription = params.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
-		RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor);
+		String tags = params.get("recipeTags");
+		RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor, tags);
 		
 		recipe.addRecipeVersion(version);
 		
@@ -172,6 +207,25 @@ public class RecipeController {
 		return "redirect:/recipe/" + id;
 	}
 	
+	/**
+	 * Restores a recipe version
+	 * @param params
+	 * @param attr
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST, value = "/recipe/{id}/version/{idv}/restore")
+	public String restoreRecipeVersion(@RequestParam Map<String, String> params, RedirectAttributes attr,  @PathVariable String id, @PathVariable String idv) {
+		Recipe recipe = AbstractDomainObject.fromExternalId(id);
+		RecipeVersion version = recipe.getVersion(idv);
+		RecipeVersion newVersion = new RecipeVersion(version.getTitle(), version.getProblem(), version.getSolution(), version.getAuthor(), version.getTagsAsStrings());
+		
+		recipe.addRecipeVersion(newVersion);
+		
+		attr.addFlashAttribute("update", true);
+
+		return "redirect:/recipe/" + id;
+	}
 
 	/*************
 	 *   CREATION ROUTES
@@ -201,18 +255,13 @@ public class RecipeController {
 		String recipeSolutionDescription = params.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
 		String tags = params.get("recipeTags");
-		String[] tokens = tags.split(",");
 		
-		
-		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor);
-		RecipeVersion version = recipe.getLastVersion();
-		for(String token : tokens){
-			version.addTag(Tag.fromString(token));
-		}
+		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor, tags);
 		
 		attr.addFlashAttribute("creation", true);
 
 		return "redirect:/recipe/" + recipe.getExternalId();
+		
 	}
 	
 	

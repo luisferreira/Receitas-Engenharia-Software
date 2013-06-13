@@ -13,36 +13,35 @@
 		</div>
 	</c:if>
 	<div class="page-header">
-		<h1>${recipe.lastVersion.title}</h1>
+		<h1>${version.title} - [${version.getFormatedCreationDate()}]</h1>
 	</div>
 	<div class="row-fluid">
 		<div class="span5">
 			<div>
 				<p class="lead">The problem:</p>
-				<div class="well">${recipe.lastVersion.problem}</div>
+				<div class="well">${version.problem}</div>
 			</div>
 			<div class="row">&nbsp;</div>
 			<div>
 				<p class="lead">The solution:</p>
-				<div class="well">${recipe.lastVersion.solution}</div>
+				<div class="well">${version.solution}</div>
 			</div>
 			<div>
 				<p class="lead">Tags:</p>
 				<c:choose>
-					<c:when test="${empty recipe.lastVersion.getTagSet()}">
+					<c:when test="${empty version.getTagSet()}">
 						<div class="well">no tags</div>
 					</c:when>
 					<c:otherwise>
 					<div class= "hero-unit well">
-						<c:forEach var="tag" items='${recipe.lastVersion.getTagSet()}'>
+						<c:forEach var="tag" items='${version.getTagSet()}'>
 								<span class="label label-warning">${tag.tag} </span>
 						</c:forEach>
 					</div>
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<a href="#" class="confirm-delete btn btn-danger" data-toggle="modal">Delete Recipe</a> 
-			<a href="/recipe/${recipe.externalId}/edit" class="btn btn-info"> Edit Recipe</a>
+			<a href="#" class="confirm-delete btn btn-warning" data-toggle="modal">Restore this version</a>
 		</div>
 
 		<div class="span4 pull-right">
@@ -72,17 +71,22 @@
 	</div>
 </div>
 
-
 <div id="myModal" class="modal hide">
     <div class="modal-header">
         <a href="#" data-dismiss="modal" aria-hidden="false" class="close">×</a>
-         <h3>Delete Recipe...</h3>
+         <h3>Restore ${version.getFormatedCreationDate()} version </h3>
     </div>
     <div class="modal-body">
-        <p>Are you sure about to delete this recipe?</p>
+        <p>Are you sure you want to restore the ${getFormatedCreationDate()} version?</p>
     </div>
     <div class="modal-footer">
-      <a href="/recipe/${recipe.externalId}/delete" id="btnYes" class="btn btn-success">Yes</a>
+    	<form method="post" action="/recipe/${recipe.externalId}/version/${version.externalId}/restore">
+			<div class="control-group">
+			<div class="controls">
+					<button type="submit" class="btn btn-warning">Restore version</button>
+				</div>
+			</div>
+		</form>
       <a href="#" data-dismiss="modal" aria-hidden="false" class="btn btn-danger">No </a>
     </div>
 </div>

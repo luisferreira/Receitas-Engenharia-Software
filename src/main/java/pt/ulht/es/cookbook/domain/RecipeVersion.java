@@ -16,6 +16,20 @@ public class RecipeVersion extends RecipeVersion_Base implements
 		
 	}
 	
+	public RecipeVersion(String recipetitle, String recipeProblemDescription,
+			String recipeSolutionDescription, String recipeAuthor, String tags) {
+		setTitle(recipetitle);
+		setProblem(recipeProblemDescription);
+		setSolution(recipeSolutionDescription);
+		setAuthor(recipeAuthor);
+		setCreationTimestamp(new DateTime());
+		String[] tokens = tags.split(",");
+		for(String token : tokens){
+			this.addTag(Tag.fromString(token.trim()));
+		}
+		
+	}
+	
 	public int compareTo(RecipeVersion o) {
 		return getCreationTimestamp().compareTo(o.getCreationTimestamp());
 	}
@@ -54,5 +68,5 @@ public class RecipeVersion extends RecipeVersion_Base implements
 	{
 		return StringUtils.join(getTagSet(), ","); 
 	}
-	//TODO: fazer override do tostring
+	
 }
