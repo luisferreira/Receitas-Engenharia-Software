@@ -49,7 +49,7 @@
 		                preventSubmitOnEnter: true,
 		                isClearInputOnEsc: true,
 		                typeahead: true,
-		                typeaheadSource: ${existingTags},
+		                typeaheadSource: ${existingTags eq null ? '[]' : existingTags},
 		                blinkBGColor_1: '#FFFF9C',
 		                blinkBGColor_2: '#CDE69C',
 		            });
@@ -60,7 +60,7 @@
 		                preventSubmitOnEnter: true,
 		                isClearInputOnEsc: true,
 		                typeahead: true,
-		                typeaheadSource: ${existingTags},
+		                typeaheadSource: ${existingTags eq null ? '[]' : existingTags},
 		                blinkBGColor_1: '#FFFF9C',
 		                blinkBGColor_2: '#CDE69C',
 		            });
