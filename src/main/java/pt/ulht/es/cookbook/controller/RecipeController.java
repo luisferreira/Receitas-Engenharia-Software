@@ -2,6 +2,7 @@ package pt.ulht.es.cookbook.controller;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -101,9 +102,7 @@ public class RecipeController {
 				} else if ((Boolean) model.asMap().get("update")){
 					model.addAttribute("creationMessage", "update");
 				}
-			} catch (Exception e) {
-				System.out.println("ERROR: " + e.getLocalizedMessage());
-			}
+			} catch (Exception e) {}
 			return "showRecipeVersionDetail";
 		} else {
 			model.addAttribute("title", "[CookBook] - Recipe not found");
@@ -125,9 +124,7 @@ public class RecipeController {
 			if ((Boolean) model.asMap().get("delete")){
 				model.addAttribute("deletionMessage", "deleted");
 			}
-		} catch (Exception e) {
-			System.out.println("ERROR: " + e.getLocalizedMessage());
-		} 
+		} catch (Exception e) {} 
 		
 		return "listRecipes";
 	}
@@ -160,14 +157,14 @@ public class RecipeController {
 	public String showEditRecipe(Model model, @PathVariable String id) {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
 		
-		//Necessário ajustar o destino
+		model.addAttribute("existingTags", CookBookManager.tagsToJSArray());
 		model.addAttribute("recipe", recipe);
 		
 		return "editRecipe";
 	}
 
 	/**
-	 * Restores a recipe version
+	 * Edits a recipe - creates new version
 	 * @param params
 	 * @param attr
 	 * @param id
@@ -180,7 +177,7 @@ public class RecipeController {
 		String recipeProblemDescription = params.get("recipeProblemDescription");
 		String recipeSolutionDescription = params.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
-		String tags = params.get("recipeTags");
+		String tags = params.get("hidden-recipeTags");
 		RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription,recipeSolutionDescription, recipeAuthor, tags);
 		
 		recipe.addRecipeVersion(version);
@@ -218,6 +215,7 @@ public class RecipeController {
 	@RequestMapping(method = RequestMethod.GET, value = "/recipe/create")
 	public String showRecipeCreationForm(Model model) {
 		model.addAttribute("title", "[CookBook] - Create new recipe");
+		model.addAttribute("existingTags", CookBookManager.tagsToJSArray());
 		return "newRecipe";
 	}
 	
@@ -233,7 +231,7 @@ public class RecipeController {
 		String recipeProblemDescription = params.get("recipeProblemDescription");
 		String recipeSolutionDescription = params.get("recipeSolutionDescription");
 		String recipeAuthor = params.get("recipeAuthor");
-		String tags = params.get("recipeTags");
+		String tags = params.get("hidden-recipeTags");
 		Recipe recipe = new Recipe(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor, tags);
 		
 		attr.addFlashAttribute("creation", true);
@@ -248,7 +246,7 @@ public class RecipeController {
 	@RequestMapping (method = RequestMethod.GET, value = "/recipe/search")
 	public String searchRecipes(Model model) {
 		model.addAttribute("title", "[CookBook] - Search");
-		attr.addFlashAttribute("direct", "direct");
+		model.addAttribute("direct", "direct");
 		return "searchResults";
 	}
 	
@@ -269,7 +267,6 @@ public class RecipeController {
 		for(String srchStr : searchParams){
 			// title
 			for (Recipe r : CookBookManager.getOrderedRecipes()) {
-				System.out.println("r title: " + r.getLastVersion().getTitle().toLowerCase() + "\nMatching : " + srchStr.trim().toLowerCase());
 				if (r.getLastVersion().getTitle().toLowerCase().contains(srchStr.trim().toLowerCase())){
 					results.add(new SearchResults(srchStr, "title", r));
 				}

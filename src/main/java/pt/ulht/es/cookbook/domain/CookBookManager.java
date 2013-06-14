@@ -1,6 +1,7 @@
 package pt.ulht.es.cookbook.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,4 +37,26 @@ public class CookBookManager extends CookBookManager_Base {
 		}
 		return allRecipes.subList(0, collectionSize);
 	}   
+	
+	public static String[] getAllTags(){
+		ArrayList<String> tags = new ArrayList<String>();
+		for (Tag t : getInstance().getTagSet()){
+			tags.add(t.getTag());
+		}
+		String[] results = new String[tags.size()];
+		results = tags.toArray(results); 
+		return results;
+	}
+	
+	public static String tagsToJSArray(){
+		String tags = "[";
+		for(String t : getAllTags()){
+			tags += "\"" + t + "\",";
+		}
+		if (tags.endsWith(","))
+			tags=tags.substring(0, tags.length()-1);
+		tags += "]";
+		
+		return tags;
+	}
 }

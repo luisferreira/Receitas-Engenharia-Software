@@ -39,8 +39,11 @@
 		<div class="control-group">
 			<label class="control-label" for="recipeTags">Tags *</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" id="recipeTags"
-					name="recipeTags" placeholder="Tag Me..." required>
+				<!-- <input type="text" class="input-xlarge tm-input" id="recipeTags"
+			 		name="recipeTags" placeholder="Tag Me..." data-provide="typeahead" data-items="4" data-source='${existingTags}' autocomplete="off" required>
+				-->
+				<input type="text" class="input-small tm-input" id="recipeTags"
+					name="recipeTags" placeholder="Tag Me..." autocomplete="off" >
 			</div>
 		</div>
 		<div class="control-group">

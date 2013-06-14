@@ -54,9 +54,20 @@ public class RecipeVersion extends RecipeVersion_Base implements
 		
 	}
 	
-	public String getTagsAsStrings()
-	{
+	public String getTagsAsStrings() {
 		return StringUtils.join(getTagSet(), ","); 
+	}
+	
+	public String getTagsAsJSArray(){
+		String tags = "[";
+		for(Tag t : getTagSet()){
+			tags += "\"" + t.getTag() + "\",";
+		}
+		if (tags.endsWith(","))
+			tags=tags.substring(0, tags.length()-1);
+		tags += "]";
+		
+		return tags;
 	}
 	
 }

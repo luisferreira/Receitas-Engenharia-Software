@@ -27,9 +27,9 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="recipeTags">Tags *</label>
+			<label class="control-label" for="recipeTags">Tags</label>
 			<div class="controls">
-				<input type="text" class="input-xlarge" id="recipeTags" name="recipeTags" value="${recipe.lastVersion.tagsAsStrings}" required>
+				<input type="text" class="input-small tm-edit" id="recipeTags" name="recipeTags" autocomplete="off">
 			</div>
 		</div>
 		<div class="control-group">
