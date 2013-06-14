@@ -20,7 +20,7 @@
 						<th>Title</th>
 						<th>Problem</th>
 						<th>Author</th>
-						<th>Added</th>
+						<th>Last Change</th>
 					</tr>
 				</thead>
 				<tbody data-provides="rowlink">
