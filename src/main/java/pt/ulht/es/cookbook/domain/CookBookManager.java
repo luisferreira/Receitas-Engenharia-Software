@@ -35,7 +35,5 @@ public class CookBookManager extends CookBookManager_Base {
 			return allRecipes;
 		}
 		return allRecipes.subList(0, collectionSize);
-	}
-    
+	}   
 }
-

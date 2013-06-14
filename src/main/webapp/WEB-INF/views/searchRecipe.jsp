@@ -4,7 +4,7 @@
 			<div>
 				<c:choose>
 					<c:when test="${fn:length(recipes) < 1}">
-						<h1>No recipes found with ${searchQuery}</h1>
+						<h1>No recipes found with keyword(s) "${searchQuery}"</h1>
 						<p class="lead">Search something else<p>
 						<form method="POST" action="/recipe/search" class="form-search">
 							<div class="input-append">
@@ -16,7 +16,7 @@
 						<a class="btn btn-primary" href="/recipe/create">Create a recipe yourself!</a>
 					</c:when>
 					<c:otherwise>
-						<h1>Recipes found with keyword "${searchQuery}" :</h1>
+						<h1>Recipes found with keyword(s) "${searchQuery}" :</h1>
 						<table class="table table-striped table-bordered">
 							<thead>
 								<tr>

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookBookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
@@ -28,11 +27,7 @@ import pt.ulht.es.cookbook.domain.SearchResults;
 @Controller
 public class RecipeController {
 	
-	/*************
-	 *   ROOT
-	 *************/
-	
-
+	/************* ROOT *************/
 	/**
 	 * Shows the home page
 	 * @param model
@@ -51,11 +46,7 @@ public class RecipeController {
         return "home";
 	}
 	
-	
-	/*************
-	 *   SHOW ROUTES
-	 *************/
-
+	/************* SHOW ROUTES *************/
 	/**
 	 * Shows a specific recipe
 	 * @param model
@@ -141,14 +132,7 @@ public class RecipeController {
 		return "listRecipes";
 	}
 	
-	
-	
-	
-	/*************
-	 *   DELETE ROUTES
-	 *************/
-
-	/**
+	/************* DELETE ROUTES *************//**
 	 * Deletes a recipe and all versions
 	 * @param model
 	 * @param id
@@ -166,13 +150,7 @@ public class RecipeController {
 		return "redirect:/recipe/all";
 	}
 	
-	
-	
-	/*************
-	 *   EDIT ROUTES
-	 *************/
-	
-	/**
+	/************* EDIT ROUTES *************//**
 	 * Shows recipe edit form
 	 * @param model
 	 * @param id
@@ -232,11 +210,7 @@ public class RecipeController {
 		return "redirect:/recipe/" + id;
 	}
 
-	/*************
-	 *   CREATION ROUTES
-	 *************/
-
-	/**
+	/************* CREATION ROUTES *************//**
 	 * Show recipe creation form
 	 * @param model
 	 * @return recipe creation form
@@ -265,15 +239,9 @@ public class RecipeController {
 		attr.addFlashAttribute("creation", true);
 
 		return "redirect:/recipe/" + recipe.getExternalId();
-		
 	}
 	
-	
-	/*************
-	 *   SEARCH ROUTES
-	 *************/
-	
-	/**
+	/**************   SEARCH ROUTES ************//**
 	 * Shows the search results
 	 * @param model
 	 * @param query
@@ -281,7 +249,7 @@ public class RecipeController {
 	 */
 	@RequestMapping (method = RequestMethod.POST, value = "/recipe/search2")
 	public String searchRecipes2(Model model, @RequestParam("param") String query) {
-		String[] searchParams = query.split(",| ");
+		String[] searchParams = query.split(",");
 		List<Recipe> resultSet = new ArrayList<Recipe>();
 			
 		/*Create new recipe list to increase search method by reducing duplicate recipes founded*/
@@ -291,7 +259,9 @@ public class RecipeController {
 	    Iterator<Recipe> itr = allRecipesToSearch.iterator();
 	    while(itr.hasNext()) {
 	    	Recipe recipe = itr.next();    	
-			for (int i=0; i< searchParams.length;i++) {				
+			for (int i=0; i< searchParams.length;i++) {
+				
+				/*Search for all required elements*/
 				if (   recipe.getLastVersion().getTitle().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim()) 
 					|| recipe.getLastVersion().getProblem().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim()) 
 					|| recipe.getLastVersion().getSolution().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim())
@@ -304,13 +274,15 @@ public class RecipeController {
 					
 					/*Lets remove duplicate recipes to show only unique entries*/
 					List<Recipe> finalResultSet = new ArrayList<Recipe>();
-					HashSet<Recipe> lookup = new HashSet<Recipe>();
+					HashSet<Recipe> lookup = new HashSet<Recipe>();	
 					for (Recipe orignalrecipe : resultSet) {
 					    if (!lookup.contains(orignalrecipe)) {
 					        lookup.add(orignalrecipe);
 					        finalResultSet.add(orignalrecipe);
 					    }
 					}
+					
+					/*Return resultset without eventual duplicate recipes*/
 					resultSet = finalResultSet;
 				}
 			}	

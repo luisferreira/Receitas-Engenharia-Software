@@ -70,5 +70,4 @@ public class PropertiesManager {
 		}
 		return config;
 	}
-
 }

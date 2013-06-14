@@ -1,5 +1,4 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-
 <div class="container">
 	<c:if
 		test="${(creationMessage eq 'creation') || (creationMessage eq 'update')}">
@@ -86,10 +85,12 @@
 			<div class="control-group">
 			<div class="controls">
 					<button type="submit" class="btn btn-warning">Restore version</button>
+					<a href="#" data-dismiss="modal" aria-hidden="false" class="btn btn-danger">No </a>
 				</div>
 			</div>
+
 		</form>
-      <a href="#" data-dismiss="modal" aria-hidden="false" class="btn btn-danger">No </a>
+      
     </div>
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
