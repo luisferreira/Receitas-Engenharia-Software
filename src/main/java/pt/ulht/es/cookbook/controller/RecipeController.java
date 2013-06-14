@@ -241,58 +241,24 @@ public class RecipeController {
 		return "redirect:/recipe/" + recipe.getExternalId();
 	}
 	
-	/**************   SEARCH ROUTES ************//**
+	/**************   
+	 * SEARCH ROUTES 
+	 * ************/
+	
+	@RequestMapping (method = RequestMethod.GET, value = "/recipe/search")
+	public String searchRecipes(Model model) {
+		model.addAttribute("title", "[CookBook] - Search");
+		attr.addFlashAttribute("direct", "direct");
+		return "searchResults";
+	}
+	
+	
+	/**
 	 * Shows the search results
 	 * @param model
 	 * @param query
 	 * @return
-	 */
-	@RequestMapping (method = RequestMethod.POST, value = "/recipe/search2")
-	public String searchRecipes2(Model model, @RequestParam("param") String query) {
-		String[] searchParams = query.split(",");
-		List<Recipe> resultSet = new ArrayList<Recipe>();
-			
-		/*Create new recipe list to increase search method by reducing duplicate recipes founded*/
-		List<Recipe> allRecipesToSearch = CookBookManager.getOrderedRecipes();
-		
-		/*Lets iterate recipes to search from parameters inserted by user*/
-	    Iterator<Recipe> itr = allRecipesToSearch.iterator();
-	    while(itr.hasNext()) {
-	    	Recipe recipe = itr.next();    	
-			for (int i=0; i< searchParams.length;i++) {
-				
-				/*Search for all required elements*/
-				if (   recipe.getLastVersion().getTitle().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim()) 
-					|| recipe.getLastVersion().getProblem().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim()) 
-					|| recipe.getLastVersion().getSolution().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim())
-					|| recipe.getLastVersion().getAuthor().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim())
-					|| recipe.getLastVersion().getTagsAsStrings().toString().toLowerCase().trim().contains(searchParams[i].toString().toLowerCase().trim()))
-				{
-			
-					/*Add recipe to show on interface*/
-					resultSet.add(recipe);
-					
-					/*Lets remove duplicate recipes to show only unique entries*/
-					List<Recipe> finalResultSet = new ArrayList<Recipe>();
-					HashSet<Recipe> lookup = new HashSet<Recipe>();	
-					for (Recipe orignalrecipe : resultSet) {
-					    if (!lookup.contains(orignalrecipe)) {
-					        lookup.add(orignalrecipe);
-					        finalResultSet.add(orignalrecipe);
-					    }
-					}
-					
-					/*Return resultset without eventual duplicate recipes*/
-					resultSet = finalResultSet;
-				}
-			}	
-		}
-		model.addAttribute("searchQuery", StringUtils.join(searchParams,", "));
-		model.addAttribute("recipes", resultSet);
-
-		return "searchRecipe";
-	}
-	
+	 */	
 	@RequestMapping (method = RequestMethod.POST, value = "/recipe/search")
 	public String searchRecipes(Model model, @RequestParam("param") String query) {
 		String[] searchParams = query.split(",");
@@ -395,7 +361,8 @@ public class RecipeController {
 		
 		List<SearchResults> top = new ArrayList<SearchResults>(fml.values());
 		Collections.sort(top);
-		searchResults.put("topThree", top.subList(0, 3));
+		int max = top.size();
+		searchResults.put("topThree", top.subList(0, (max >= 3 ? 3 : max)));
 		
 		for(String srchStr : searchParams) {
 			ArrayList<SearchResults> matchedResults = new ArrayList<SearchResults>();
@@ -408,6 +375,7 @@ public class RecipeController {
 			}
 		}
 		
+		model.addAttribute("title", "[CookBook] - Search results");
 		model.addAttribute("searchQuery", StringUtils.join(searchParams,", "));
 		model.addAttribute("results", searchResults);
 		

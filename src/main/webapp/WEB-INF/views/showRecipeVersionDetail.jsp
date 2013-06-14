@@ -34,7 +34,7 @@
 					<c:otherwise>
 					<div class= "hero-unit well">
 						<c:forEach var="tag" items='${version.getTagSet()}'>
-								<span class="label label-warning">${tag.tag} </span>
+								<span class="badge badge-info" >${tag.tag} </span>
 						</c:forEach>
 					</div>
 					</c:otherwise>
