@@ -3,7 +3,7 @@
 		<c:if test="${!(direct eq 'direct')}">
 			<c:choose>
 				<c:when test="${fn:length(results.get('topThree')) < 1}">
-					<h1>No recipes found with ${searchQuery}</h1>
+					<h1>No recipes found with keyword "${searchQuery}" </h1>
 					<p class="lead">Search something else<p>
 					<form method="POST" action="/recipe/search" class="form-search">
 						<div class="input-append">
@@ -16,7 +16,7 @@
 					<a class="btn btn-primary" href="/recipe/create">Create a recipe yourself!</a>
 				</c:when>
 				<c:otherwise>
-					<h1>Top three results found for "${searchQuery}" :</h1>
+					<h1>Top results found for "${searchQuery}" :</h1>
 					<table class="table table-striped table-bordered">
 						<thead>
 							<tr>
@@ -58,7 +58,7 @@
 					
 					<c:forEach var="str" items="${results.keySet()}">
 						<c:if test="${!(str eq 'topThree')}">
-							<h1>Recipes found with keyword "${str}" :</h1>
+							<h1>All Recipes found with keyword "${str}" :</h1>
 							<table class="table table-striped table-bordered">
 								<thead>
 									<tr>
