@@ -1,10 +1,8 @@
 package pt.ulht.es.cookbook.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import pt.ist.fenixframework.FenixFramework;
 
 public class CookBookManager extends CookBookManager_Base {
@@ -19,6 +17,8 @@ public class CookBookManager extends CookBookManager_Base {
 		for (Recipe recipe : getInstance().getRecipeSet()) {
 			allRecipes.add(recipe);
 		}
+		
+		Collections.sort(allRecipes);
 			
 		return allRecipes;
 	}
@@ -26,7 +26,6 @@ public class CookBookManager extends CookBookManager_Base {
 	public static List<Recipe> getLastFiveRecipes() {
 		ArrayList<Recipe> allRecipes = new ArrayList<Recipe>(getInstance().getRecipeSet());
 
-		Collections.sort(allRecipes);
 		int collectionSize = allRecipes.size();
 
 		if (collectionSize > 4) {
