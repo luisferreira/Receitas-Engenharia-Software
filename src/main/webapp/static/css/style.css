@@ -73,3 +73,8 @@ code {
 	text-align: center;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
 }
+
+.hideOverflow
+{
+    text-overflow:ellipsis;
+}

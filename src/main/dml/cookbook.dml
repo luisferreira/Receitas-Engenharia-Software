@@ -1,0 +1,38 @@
+package pt.ulht.es.cookbook.domain;
+
+class CookBookManager;
+
+class Recipe;
+
+class RecipeVersion {
+	String title;
+	String problem;
+	String solution;
+	String author;
+	String tags;
+	DateTime creationTimestamp;
+}
+
+class Tag {
+	String tag;
+}
+
+relation CookbookManagerHasManyRecipes {
+	CookBookManager playsRole cookbookManager { multiplicity 1..1; }
+	Recipe playsRole recipe { multiplicity 0..*; }
+}	
+
+relation CookbookManagerHasManyTags {
+	CookBookManager playsRole cookbookManager { multiplicity 1..1; }
+	Tag playsRole tag { multiplicity 0..*; }
+}
+
+relation RecipeHasManyRecipeVersions {
+	Recipe playsRole recipe { multiplicity 1..1; }
+	RecipeVersion playsRole recipeVersion { multiplicity 0..*; }
+}	
+
+relation RecipeHasManyTags {
+	RecipeVersion playsRole recipeVersion { multiplicity 0..*; }
+	Tag playsRole tag { multiplicity 0..*; }
+}
