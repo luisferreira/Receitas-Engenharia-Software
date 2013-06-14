@@ -1,106 +1,45 @@
 package pt.ulht.es.cookbook.domain;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class Recipe extends Recipe_Base implements Comparable<Recipe> {
-
-	private String recipeTitle;
-	private String recipeProblemDescription;
-	private String recipeSolutionDescription;
-	private String recipeAuthor;
-	private String id;
-	private Date creationDate;
-	private String formatedCreationDate;
-	private int recipeVersion;
-
-	public Recipe(String recipetitle, String recipeProblemDescription,String recipeSolutionDescription, String recipeAuthor) {
-		this.recipeAuthor = recipeAuthor;
-		this.recipeProblemDescription = recipeProblemDescription;
-		this.recipeSolutionDescription = recipeSolutionDescription;
-		this.recipeTitle = recipetitle;
-		this.creationDate = new Date();
-		
-		/*Format Date to show in interface. creationdate not reused because its being used with date type by comparator*/
-		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");	
-		this.formatedCreationDate = format.format(this.creationDate);
-		
-		/*Necessário alterar isto quando existir controlo de versões*/
-		this.recipeVersion = 1;
-	}
-
-	public void setRecipeAuthor(String recipeAuthor) {
-		this.recipeAuthor = recipeAuthor;
-	}
-
-	public String getRecipeAuthor() {
-		return recipeAuthor;
-	}
-
-	public void setRecipeProblemDescription(String recipeProblemDescription) {
-		this.recipeProblemDescription = recipeProblemDescription;
-	}
-
-	public String getRecipeProblemDescription() {
-		return recipeProblemDescription;
-	}
-
-	public void setRecipeSolutionDescription(String recipeSolutionDescription) {
-		this.recipeSolutionDescription = recipeSolutionDescription;
-	}
-
-	public String getRecipeSolutionDescription() {
-		return recipeSolutionDescription;
-	}
-
-	public void setRecipeTitle(String recipetitle) {
-		this.recipeTitle = recipetitle;
-	}
-
-	public String getRecipeTitle() {
-		return recipeTitle;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public void setCreationDate(Date creationData) {
-		this.creationDate = creationData;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public String getFormatedCreationDate() {
-		return this.formatedCreationDate;
-	}
-
-	public int getRecipeVersion() {
-		return recipeVersion;
-	}
-
-	public void setRecipeVersion(int recipeversion) {
-		this.recipeVersion = recipeversion;
-	}
+public class Recipe extends Recipe_Base implements Comparable<Recipe>{
+       
+    public Recipe(String recipetitle, String recipeProblemDescription, String recipeSolutionDescription, String recipeAuthor, String tags) {
+    	RecipeVersion version = new RecipeVersion(recipetitle, recipeProblemDescription, recipeSolutionDescription, recipeAuthor, tags);
+    	addRecipeVersion(version);
+    	setCookbookManager(CookBookManager.getInstance());
+    }
+    
+    public RecipeVersion getLastVersion(){
+    	List<RecipeVersion> list = new ArrayList<RecipeVersion>(getRecipeVersionSet());
+    	Collections.sort(list);
+    	return list.get(list.size()-1);
+    }
 
 	public int compareTo(Recipe o) {
-		return this.getRecipeTitle().compareTo(o.getRecipeTitle());
+		return getLastVersion().getTitle().toLowerCase().compareTo(o.getLastVersion().getTitle().toLowerCase());
 	}
-	
-	public boolean match(String[] words){
-		boolean found = false;
-		for(String word : words){
-			 if (this.recipeTitle.toLowerCase().contains(word.toLowerCase())) {
-				 found = true;
-				 break;
-			 }
+
+	public void delete(Recipe recipe) {
+		removeCookbookManager();
+		
+		for (RecipeVersion version : recipe.getRecipeVersion()) {
+			version.delete();
 		}
-		return found;
+		
+		super.deleteDomainObject();
+	} 	
+	
+	public RecipeVersion getVersion(String id){
+		RecipeVersion version = null;
+		for(RecipeVersion v : this.getRecipeVersionSet()){
+			if (v.getExternalId().equals(id)){
+				version = v;
+				break;
+			}				
+		}
+		return version;
 	}
 }

@@ -1,5 +1,13 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
+		<c:if test="${deletionMessage eq 'deleted'}">
+			<div class="span12 pagination-centered">
+				<div id="saveSuccessMessage" class = "alert alert-info fade in" data-alert = "alert">
+  					<a class="close" href="#">×</a>
+					<p>Recipe deleted!</p>
+				</div>
+			</div> 
+		</c:if>
 		<div>
 			<div>
 				<c:choose>
@@ -16,18 +24,16 @@
 									<th>Name</th>
 									<th>Problem</th>
 									<th>Author</th>
-									<th>Date Added</th>
-									<th>ID</th>
+									<th>Last Change</th>
 								</tr>
 							</thead>
 							<tbody data-provides="rowlink">
 								<c:forEach var="recipe" items='${recipes}'>
 									<tr>
-										<td><a class="rowlink" href="/recipe/${recipe.id}">${recipe.recipeTitle}</a></td>
-										<td>${recipe.recipeProblemDescription}</td>
-										<td>${recipe.recipeAuthor}</td>
-										<td>${recipe.formatedCreationDate}</td>
-										<td>${recipe.id}</td>
+										<td><a class="rowlink" href="/recipe/${recipe.externalId}">${recipe.lastVersion.title}</a></td>
+										<td>${recipe.lastVersion.problem}</td>
+										<td>${recipe.lastVersion.author}</td>
+										<td>${recipe.lastVersion.getFormatedCreationDate()}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

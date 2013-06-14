@@ -14,6 +14,7 @@
     	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-responsive.min.css" />
 		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-rowlink.min.css" />
+		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-tagmanager.css" />
 		<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
 	</head>
 	<body>
@@ -37,7 +38,7 @@
 								</li>
 							</ul>
 							<form method="POST" action="/recipe/search" class="navbar-search pull-right">
-			    				<input type="text" class="search-query" placeholder="Search" name="param">
+			    				<input id="myInput" title="search multiple with comma separated values, enter to submit" type="text" class="search-query" placeholder="Search" name="param"> 
 			    			</form>
 						</div>
 					</div>

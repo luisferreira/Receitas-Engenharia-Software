@@ -20,16 +20,16 @@
 						<th>Title</th>
 						<th>Problem</th>
 						<th>Author</th>
-						<th>Added</th>
+						<th>Last Change</th>
 					</tr>
 				</thead>
 				<tbody data-provides="rowlink">
 					<c:forEach var="recipe" items='${recipes}'>
 						<tr>
-							<td><a class="rowlink" href="/recipe/${recipe.id}">${recipe.recipeTitle}</a></td>
-							<td>${recipe.recipeProblemDescription}</td>
-							<td>${recipe.recipeAuthor}</td>
-							<td>${recipe.formatedCreationDate}</td>
+							<td><a class="rowlink" href="/recipe/${recipe.externalId}">${recipe.lastVersion.title}</a></td>
+							<td>${recipe.lastVersion.problem}</td>
+							<td>${recipe.lastVersion.author}</td>
+							<td>${recipe.lastVersion.getFormatedCreationDate()}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
