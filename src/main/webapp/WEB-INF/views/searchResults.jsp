@@ -26,7 +26,7 @@
 								<th>Problem</th>
 								<th>Solution</th>
 								<th>Author</th>
-								<th>Date Added</th>
+								<th>Last Change</th>
 							</tr>
 						</thead>
 						<tbody data-provides="rowlink">
@@ -68,7 +68,7 @@
 										<th>Problem</th>
 										<th>Solution</th>
 										<th>Author</th>
-										<th>Date Added</th>
+										<th>Last Change</th>
 									</tr>
 								</thead>
 								<tbody data-provides="rowlink">
