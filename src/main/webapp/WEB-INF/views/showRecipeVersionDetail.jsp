@@ -41,7 +41,9 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<a href="#" class="confirm-delete btn btn-warning" data-toggle="modal">Restore this version</a>
+			<c:if test="${!(recipe.lastVersion.externalId eq version.externalId)}">
+				<a href="#" class="confirm-delete btn btn-warning" data-toggle="modal">Restore this version</a>
+			</c:if>
 		</div>
 
 		<div class="span4 pull-right">

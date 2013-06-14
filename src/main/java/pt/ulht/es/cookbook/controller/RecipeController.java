@@ -2,12 +2,13 @@ package pt.ulht.es.cookbook.controller;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookBookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
 import pt.ulht.es.cookbook.domain.RecipeVersion;
-import pt.ulht.es.cookbook.domain.Tag;
+import pt.ulht.es.cookbook.domain.SearchResults;
 
 @Controller
 public class RecipeController {
@@ -278,8 +279,8 @@ public class RecipeController {
 	 * @param query
 	 * @return
 	 */
-	@RequestMapping (method = RequestMethod.POST, value = "/recipe/search")
-	public String searchRecipes(Model model, @RequestParam("param") String query) {
+	@RequestMapping (method = RequestMethod.POST, value = "/recipe/search2")
+	public String searchRecipes2(Model model, @RequestParam("param") String query) {
 		String[] searchParams = query.split(",| ");
 		List<Recipe> resultSet = new ArrayList<Recipe>();
 			
@@ -318,5 +319,126 @@ public class RecipeController {
 		model.addAttribute("recipes", resultSet);
 
 		return "searchRecipe";
+	}
+	
+	@RequestMapping (method = RequestMethod.POST, value = "/recipe/search")
+	public String searchRecipes(Model model, @RequestParam("param") String query) {
+		String[] searchParams = query.split(",");
+		
+		ArrayList<SearchResults> results = new ArrayList<SearchResults>();
+		
+		// title
+		for(String srchStr : searchParams){
+			// title
+			for (Recipe r : CookBookManager.getOrderedRecipes()) {
+				System.out.println("r title: " + r.getLastVersion().getTitle().toLowerCase() + "\nMatching : " + srchStr.trim().toLowerCase());
+				if (r.getLastVersion().getTitle().toLowerCase().contains(srchStr.trim().toLowerCase())){
+					results.add(new SearchResults(srchStr, "title", r));
+				}
+			}
+			
+			// problem
+			for (Recipe r : CookBookManager.getOrderedRecipes()) {
+				if (r.getLastVersion().getProblem().toLowerCase().contains(srchStr.trim().toLowerCase())){
+					boolean existing = false;
+					for(SearchResults sr : results) {
+						if (sr.getRecipe().equals(r) && sr.getTerm().equals(srchStr)){
+							sr.addMatchField("problem");
+							existing = true;
+						}
+					}
+					if (!existing) {
+						results.add(new SearchResults(srchStr, "problem", r));
+					}
+				}
+			}
+			
+			// solution
+			for (Recipe r : CookBookManager.getOrderedRecipes()) {
+				if (r.getLastVersion().getSolution().toLowerCase().contains(srchStr.trim().toLowerCase())){
+					boolean existing = false;
+					for(SearchResults sr : results) {
+						if (sr.getRecipe().equals(r) && sr.getTerm().equals(srchStr)){
+							sr.addMatchField("solution");
+							existing = true;
+						}
+					}
+					if (!existing)
+						results.add(new SearchResults(srchStr, "solution", r));
+				}
+			}
+			
+			// Author
+			for (Recipe r : CookBookManager.getOrderedRecipes()) {
+				if (r.getLastVersion().getAuthor().toLowerCase().contains(srchStr.trim().toLowerCase())){
+					boolean existing = false;
+					for(SearchResults sr : results) {
+						if (sr.getRecipe().equals(r) && sr.getTerm().equals(srchStr)){
+							sr.addMatchField("author");
+							existing = true;
+						}
+					}
+					if (!existing)
+						results.add(new SearchResults(srchStr, "author", r));
+				}
+			}
+			
+			// Tags
+			for (Recipe r : CookBookManager.getOrderedRecipes()) {
+				if (r.getLastVersion().getTagsAsStrings().toLowerCase().contains(srchStr.trim().toLowerCase())){
+					boolean existing = false;
+					for(SearchResults sr : results) {
+						if (sr.getRecipe().equals(r) && sr.getTerm().equals(srchStr)){
+							sr.addMatchField("tags");
+							existing = true;
+						}
+					}
+					if (!existing)
+						results.add(new SearchResults(srchStr, "tags", r));
+				}
+			}
+		}
+		
+		HashMap<String, List<SearchResults>> searchResults = new HashMap<String, List<SearchResults>>();
+		
+		HashMap<String, SearchResults> fml = new HashMap<String, SearchResults>();
+		for(SearchResults res : results){
+			if (fml.containsKey(res.getRecipe().getExternalId())){
+				SearchResults sr = fml.get(res.getRecipe().getExternalId());
+				
+				// terms
+				res.setTerm(res.getTerm() + ", " + sr.getTerm());
+				
+				// matches
+				for(String mf : sr.matchFields()){
+					if (!res.getMatch().toLowerCase().contains(mf.toLowerCase().trim()))
+						res.addMatchField(mf.toLowerCase().trim());
+				}
+				
+				fml.put(res.getRecipe().getExternalId(), res);
+				
+			} else
+				fml.put(res.getRecipe().getExternalId(), res);
+		}
+		
+		List<SearchResults> top = new ArrayList<SearchResults>(fml.values());
+		Collections.sort(top);
+		searchResults.put("topThree", top.subList(0, 3));
+		
+		for(String srchStr : searchParams) {
+			ArrayList<SearchResults> matchedResults = new ArrayList<SearchResults>();
+			for(SearchResults sr : results) {
+				if (sr.getTerm().toLowerCase().trim().equals(srchStr.toLowerCase().trim()))
+					matchedResults.add(sr);
+			}
+			if (matchedResults.size() > 0) {
+				searchResults.put(srchStr, matchedResults);
+			}
+		}
+		
+		model.addAttribute("searchQuery", StringUtils.join(searchParams,", "));
+		model.addAttribute("results", searchResults);
+		
+		return "searchResults";
 	}
 }

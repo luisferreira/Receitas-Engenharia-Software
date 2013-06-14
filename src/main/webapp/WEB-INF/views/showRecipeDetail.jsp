@@ -35,7 +35,7 @@
 					<c:otherwise>
 					<div class="tag-list">
 						<c:forEach var="tag" items='${recipe.lastVersion.getTagSet()}'>
-								<span class="label label-warning">${tag.tag} </span>
+								<span class="label label-warning">${tag.tag}</span>
 						</c:forEach>
 					</div>
 					</c:otherwise>
