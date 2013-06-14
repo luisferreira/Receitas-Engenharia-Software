@@ -22,7 +22,7 @@
 							<tr>
 								<th>Search term</th>
 								<th>Matching Fields</th>
-								<th>Name</th>
+								<th>Title</th>
 								<th>Problem</th>
 								<th>Solution</th>
 								<th>Author</th>
@@ -64,7 +64,7 @@
 									<tr>
 										<th>Search term</th>
 										<th>Matching Fields</th>
-										<th>Name</th>
+										<th>Title</th>
 										<th>Problem</th>
 										<th>Solution</th>
 										<th>Author</th>
