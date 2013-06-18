@@ -136,7 +136,7 @@ public class RecipeController {
 	public String deleteRecipe(Model model, @PathVariable String id, RedirectAttributes attr) {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
 		
-		recipe.delete(recipe);
+		recipe.delete();
 		
 		attr.addFlashAttribute("deletionMessage", "deleted");
 		
@@ -193,7 +193,7 @@ public class RecipeController {
 	@RequestMapping(method = RequestMethod.POST, value = "/recipe/{id}/version/{idv}/restore")
 	public String restoreRecipeVersion(@RequestParam Map<String, String> params, RedirectAttributes attr,  @PathVariable String id, @PathVariable String idv) {
 		Recipe recipe = AbstractDomainObject.fromExternalId(id);
-		RecipeVersion version = recipe.getVersion(idv);
+		RecipeVersion version = AbstractDomainObject.fromExternalId(idv);
 		RecipeVersion newVersion = new RecipeVersion(version.getTitle(), version.getProblem(), version.getSolution(), version.getAuthor(), version.getTagsAsStrings());
 		
 		recipe.addRecipeVersion(newVersion);
@@ -235,9 +235,7 @@ public class RecipeController {
 		return "redirect:/recipe/" + recipe.getExternalId();
 	}
 	
-	/**************   
-	 * SEARCH ROUTES 
-	 * ************/
+	/************** SEARCH ROUTES ************/
 	
 	@RequestMapping (method = RequestMethod.GET, value = "/recipe/search")
 	public String searchRecipes(Model model) {
